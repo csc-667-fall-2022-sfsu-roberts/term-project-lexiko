@@ -13,8 +13,7 @@ const db = require('../db');
 // });
 
 router.get("/", (request, response) => {
-    db.any(`INSERT INTO users (id, username, password, email) VALUES (1, 'jontest', 'password', 'jontest@gmail.com')`)
-        .then(_ => db.any(`SELECT * FROM users`))
+    db.any(`SELECT * FROM users`)
         .then(results => response.json(results))
         .catch(error => {
             console.log(error)
