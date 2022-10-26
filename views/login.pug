@@ -2,6 +2,7 @@ extends layout
 
 block content 
     h1= title
+    //- <a class="btn btn-1">Hover me</a>
     form(method="POST", action="/submit")
         label(for = "username") Username: 
         input(type = "text", name = "username")
@@ -9,4 +10,7 @@ block content
         label(for = "password") Password: 
         input(type = "password", name = "password")
         br
-        input(type = "submit", name = "submit", value = "submit")
+        input(type = "submit", name = "register", value = "register")
+        input.btn.btn-1(type = "submit", name = "login", value = "login")
+        
+        
