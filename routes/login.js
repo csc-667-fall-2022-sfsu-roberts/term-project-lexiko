@@ -11,6 +11,7 @@ router.get('/', function(req, res, next) {
 // Send login info somewhere?
 router.post('/', function(req, res, next) {
   console.log(req.body);
+  res.send("response sent")
 });
 
 module.exports = router;
