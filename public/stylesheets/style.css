@@ -62,6 +62,10 @@ a {
   background-position: right center; /* change the direction of the change here */
 }
 
-.btn-1 {
+.grad-1 {
   background-image: linear-gradient(to right, #4BA3C3 0%, #FF7F11 51%, #0B4F6C 100%);
+}
+
+.grad-2 {
+  background-image: linear-gradient(to right, #0B4F6C 0%, #FF7F11 51%, #4BA3C3 100%);
 }

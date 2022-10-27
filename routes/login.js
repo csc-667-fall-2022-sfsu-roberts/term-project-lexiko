@@ -6,4 +6,11 @@ router.get('/', function(req, res, next) {
   res.render('login', { title: 'Login' });
 });
 
+
+
+// Send login info somewhere?
+router.post('/', function(req, res, next) {
+  console.log(req.body);
+});
+
 module.exports = router;
