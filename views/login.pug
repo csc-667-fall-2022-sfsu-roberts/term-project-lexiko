@@ -1,23 +1,19 @@
 extends layout
 
 block content
-    h1= title
     .container
-        form(method="POST", action="/login")
-            label(for = "username") Username: 
-            input(type = "text", name = "username")
-            br
-            br
-            label(for = "password") Password: 
-            input(type = "password", name = "password")
-            br
-            br
-            br
-            br
-            .btn.grad-1(type = "submit", name = "login") Login
-            br
-            .btn.grad-2(type = "button", name = "register", href = "/register") Register
-        
+        .wrapper
+            h1  Login to Lexiko
+            form(method="POST", action="/login")
+                label(for = "username") Username: 
+                input(type = "text", name = "username")
+                br
+                label(for = "password") Password: 
+                input(type = "password", name = "password")
+                br
+                .btn.grad-1(type = "submit", name = "login") Login
+                .btn.grad-2(type = "button", name = "register", href = "/register") Register
+            
 
 //- .container
 //-   .screen

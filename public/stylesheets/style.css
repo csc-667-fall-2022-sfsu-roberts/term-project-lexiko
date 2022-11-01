@@ -1,40 +1,63 @@
+:root {
+  --blue: #6495ed;
+  --black: #000000;
+  --white: #faf0e6;
+  --baby-blue: #a1c4fd;
+  --sky-blue: #c2e9fb;
+  --amber: #f6d365;
+  --light-blue: #a1c4fd;
+  --light-orange: #fda085;
+  --yellow: #f6d365;
+
+  --color-white: #ffffff;
+	--color-light: #f1f5f9;
+	--color-black: #121212;
+	--color-night: #001632;
+
+	--color-red: #f44336;
+	--color-blue: #1a73e8;
+	--color-gray: #80868b;
+	--color-grayish: #dadce0;
+
+	--shadow-normal: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+		0 1px 2px 0 rgba(0, 0, 0, 0.06);
+	--shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+		0 2px 4px -1px rgba(0, 0, 0, 0.06);
+	--shadow-large: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+		0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #c2e9fb;
 }
 
 .container {
+  max-width: 100rem;
+  width: 100%;
   display: flex;
 	align-items: center;
 	justify-content: center;
+  flex-direction: column;
 }
 
-
-.dark-purple {
-  color: #231123;
-}
-
-.dark-blue {
-  color: #0B4F6C;
-}
-
-.amber {
-  color: #FF7F11;
-}
-
-.light-blue {
-  color: #4BA3C3;
-}
-
-.yellow {
-  color: #FAF2A1;
+.wrapper {
+  max-width: 28rem;
+  width: 100%;
+  margin: 2rem auto;
+  padding: 2rem 2.5rem;
+  border: none;
+  outline: none;
+  border-radius: 0.25rem;
+  color: var(--black);
+  background: var(--white);
+  box-shadow: var(--shadow-large);
 }
 
 
 
-#grad {
-  background: linear-gradient(to right, #4BA3C3 , #0B4F6C);
-}
 
 .btn {
   flex: 1 1 auto;
@@ -55,9 +78,9 @@ body {
 }
 
 .grad-1 {
-  background-image: linear-gradient(to right, #4BA3C3 0%, #FF7F11 51%, #0B4F6C 100%);
+  background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%)
 }
 
 .grad-2 {
-  background-image: linear-gradient(to right, #0B4F6C 0%, #FF7F11 51%, #4BA3C3 100%);
+  background-image: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%);
 }
