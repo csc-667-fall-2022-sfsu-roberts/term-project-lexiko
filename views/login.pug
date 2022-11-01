@@ -5,38 +5,13 @@ block content
         .wrapper
             h1  Login to Lexiko
             form(method="POST", action="/login")
-                label(for = "username") Username: 
-                input(type = "text", name = "username")
-                br
-                label(for = "password") Password: 
-                input(type = "password", name = "password")
-                br
-                .btn.grad-1(type = "submit", name = "login") Login
-                .btn.grad-2(type = "button", name = "register", href = "/register") Register
-            
-
-//- .container
-//-   .screen
-//-     .screen__content
-//-       form.login
-//-         .login__field
-//-           i.login__icon.fas.fa-user
-//-           input.login__input(type='text' placeholder='User name / Email')
-//-         .login__field
-//-           i.login__icon.fas.fa-lock
-//-           input.login__input(type='password' placeholder='Password')
-//-         button.button.login__submit
-//-           span.button__text Log In Now
-//-           i.button__icon.fas.fa-chevron-right
-//-       .social-login
-//-         h3 log in via
-//-         .social-icons
-//-           a.social-login__icon.fab.fa-instagram(href='#')
-//-           a.social-login__icon.fab.fa-facebook(href='#')
-//-           a.social-login__icon.fab.fa-twitter(href='#')
-//-     .screen__background
-//-       span.screen__background__shape.screen__background__shape4
-//-       span.screen__background__shape.screen__background__shape3
-//-       span.screen__background__shape.screen__background__shape2
-//-       span.screen__background__shape.screen__background__shape1
-
+                .input-control
+                    label.input-label(for = "username") Username: 
+                    input.input-field(type = "text", name = "username", placeholder = "Username")
+                .input-control
+                    label.input-label(for = "password") Password: 
+                    input.input-field(type = "password", name = "password", placeholder = "Password")
+                .input-control
+                    .login-btn.grad-1(type = "submit", name = "login") Login
+                    a(href="/register")
+                        .login-btn.grad-2.button(type = "button", name = "register", action = "/register") Register

@@ -1,16 +1,22 @@
 extends layout
 
-block content 
-    h1= title
-    //- <a class="btn btn-1">Hover me</a>
-    form(method="POST", action="/register")
-        label(for = "username") Username: 
-        input(type = "text", name = "username")
-        br
-        label(for = "password") Password: 
-        input(type = "password", name = "password")
-        br
-        button.btn.grad-2(type = "submit", name = "register") Register
-        button.btn.grad-1(type = "submit", name = "login") Login
-        
-        
+block content
+    .container
+        .wrapper
+            h1  Register for Lexiko
+            form(method="POST", action="/login")
+                .input-control
+                    label.input-label(for = "username") Username: 
+                    input.input-field(type = "text", name = "username", placeholder = "Username")
+                .input-control
+                    label.input-label(for = "email") Username: 
+                    input.input-field(type = "text", name = "email", placeholder = "Email Address")
+                .input-control
+                    label.input-label(for = "password") Password: 
+                    input.input-field(type = "password", name = "password", placeholder = "Password")
+                .input-control
+                    label.input-label(for = "confirmpassword") Confirm Password: 
+                    input.input-field(type = "password", name = "confirmpassword", placeholder = "Re-enter Password")
+                .input-control
+                    a(href="/register")
+                        .login-btn.grad-2.button(type = "submit", name = "register", action = "/register") Register

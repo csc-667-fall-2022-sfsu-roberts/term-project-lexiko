@@ -44,7 +44,10 @@ body {
 }
 
 .wrapper {
+  display: flex;
+  flex-direction: column;
   max-width: 28rem;
+  align-items: center;
   width: 100%;
   margin: 2rem auto;
   padding: 2rem 2.5rem;
@@ -57,8 +60,50 @@ body {
 }
 
 
+.form{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.input-field {
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: inherit;
+  width: 100%;
+  height: auto;
+  padding: 0.75rem 1.25rem;
+  border: none;
+  outline: none;
+  border-radius: 2rem;
+  color: var(--color-black);
+  background: var(--color-light);
+  text-transform: unset;
+  text-rendering: optimizeLegibility;
+}
 
+.input-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-bottom: 1.25rem;
+}
 
+.login-btn {
+  width: 14rem;
+  flex: 1 1 auto;
+  margin: 10px;
+  padding: 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+ /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+}
 .btn {
   flex: 1 1 auto;
   margin: 10px;
