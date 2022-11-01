@@ -6,12 +6,12 @@ block content
             h1  Login to Lexiko
             form(method="POST", action="/login")
                 .input-control
-                    label.input-label(for = "username") Username: 
+                    label.input-label(for = "username", hidden = "") Username: 
                     input.input-field(type = "text", name = "username", placeholder = "Username")
                 .input-control
-                    label.input-label(for = "password") Password: 
+                    label.input-label(for = "password", hidden = "") Password: 
                     input.input-field(type = "password", name = "password", placeholder = "Password")
                 .input-control
-                    .login-btn.grad-1(type = "submit", name = "login") Login
-                    a(href="/register")
-                        .login-btn.grad-2.button(type = "button", name = "register", action = "/register") Register
+                    input.btn.input-submit.grad-1(type = "submit", name = "login", value="Login")
+                .input-control
+                    a.btn.grad-2(type = "button", name = "register", href = "/register") Register

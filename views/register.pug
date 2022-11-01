@@ -4,19 +4,21 @@ block content
     .container
         .wrapper
             h1  Register for Lexiko
-            form(method="POST", action="/login")
+            form(method="POST", action="/register")
                 .input-control
-                    label.input-label(for = "username") Username: 
+                    label.input-label(for = "username", hidden="") Username:
                     input.input-field(type = "text", name = "username", placeholder = "Username")
                 .input-control
-                    label.input-label(for = "email") Username: 
+                    label.input-label(for = "email", hidden="") Email: 
                     input.input-field(type = "text", name = "email", placeholder = "Email Address")
                 .input-control
-                    label.input-label(for = "password") Password: 
+                    label.input-label(for = "password", hidden="") Password: 
                     input.input-field(type = "password", name = "password", placeholder = "Password")
                 .input-control
-                    label.input-label(for = "confirmpassword") Confirm Password: 
+                    label.input-label(for = "confirmpassword", hidden="") Confirm Password: 
                     input.input-field(type = "password", name = "confirmpassword", placeholder = "Re-enter Password")
                 .input-control
-                    a(href="/register")
-                        .login-btn.grad-2.button(type = "submit", name = "register", action = "/register") Register
+                    input.btn.input-submit.grad-2(type = "submit", name = "register", value = "Register")
+
+
+//- .login-btn.grad-2(type = "submit", name = "register", action = "/register") Register
