@@ -5,18 +5,10 @@ body {
 
 .container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  flex-wrap: wrap;
-  width: 80vw;
-  margin: 0 auto;
-  min-height: 100vh;
+	align-items: center;
+	justify-content: center;
 }
 
-a {
-  color: #00B7FF;
-}
 
 .dark-purple {
   color: #231123;

@@ -1,16 +1,46 @@
 extends layout
 
-block content 
+block content
     h1= title
-    //- <a class="btn btn-1">Hover me</a>
-    form(method="POST", action="/login")
-        label(for = "username") Username: 
-        input(type = "text", name = "username")
-        br
-        label(for = "password") Password: 
-        input(type = "password", name = "password")
-        br
-        button.btn.grad-2(type = "submit", name = "register") Register
-        button.btn.grad-1(type = "submit", name = "login") Login
+    .container
+        form(method="POST", action="/login")
+            label(for = "username") Username: 
+            input(type = "text", name = "username")
+            br
+            br
+            label(for = "password") Password: 
+            input(type = "password", name = "password")
+            br
+            br
+            br
+            br
+            .btn.grad-1(type = "submit", name = "login") Login
+            br
+            .btn.grad-2(type = "button", name = "register", href = "/register") Register
         
-        
+
+//- .container
+//-   .screen
+//-     .screen__content
+//-       form.login
+//-         .login__field
+//-           i.login__icon.fas.fa-user
+//-           input.login__input(type='text' placeholder='User name / Email')
+//-         .login__field
+//-           i.login__icon.fas.fa-lock
+//-           input.login__input(type='password' placeholder='Password')
+//-         button.button.login__submit
+//-           span.button__text Log In Now
+//-           i.button__icon.fas.fa-chevron-right
+//-       .social-login
+//-         h3 log in via
+//-         .social-icons
+//-           a.social-login__icon.fab.fa-instagram(href='#')
+//-           a.social-login__icon.fab.fa-facebook(href='#')
+//-           a.social-login__icon.fab.fa-twitter(href='#')
+//-     .screen__background
+//-       span.screen__background__shape.screen__background__shape4
+//-       span.screen__background__shape.screen__background__shape3
+//-       span.screen__background__shape.screen__background__shape2
+//-       span.screen__background__shape.screen__background__shape1
+
