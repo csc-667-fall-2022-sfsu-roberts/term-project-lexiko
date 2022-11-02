@@ -3,7 +3,7 @@ extends layout
 block content
     .container
         .wrapper
-            h1  Login to Lexiko
+            img(src="./images/lexikologo.png", alt="")
             form(method="POST", action="/login")
                 .input-control
                     label.input-label(for = "username", hidden = "") Username: 
@@ -12,6 +12,8 @@ block content
                     label.input-label(for = "password", hidden = "") Password: 
                     input.input-field(type = "password", name = "password", placeholder = "Password")
                 .input-control
-                    input.btn.input-submit.grad-1(type = "submit", name = "login", value="Login")
+                    .btn.input.input-submit.grad-1(type = "submit", name = "login", value="Login") Login
                 .input-control
                     a.btn.grad-2(type = "button", name = "register", href = "/register") Register
+                .input-control
+                    a(type = "button", href = "/forgot", name = "forgot", value= "forgot") Reset Password

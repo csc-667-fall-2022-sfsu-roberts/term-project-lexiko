@@ -34,6 +34,11 @@ body {
   background: #c2e9fb;
 }
 
+img[src = "./images/lexikologo.png"] {
+  max-width: 60%;
+  padding: 0rem 0rem 2.5rem 0rem;
+}
+
 .container {
   max-width: 100rem;
   width: 100%;
@@ -53,7 +58,7 @@ body {
   padding: 2rem 2.5rem;
   border: none;
   outline: none;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   color: var(--black);
   background: var(--white);
   box-shadow: var(--shadow-large);
@@ -98,7 +103,7 @@ body {
   font-weight: 500;
   line-height: inherit;
   cursor: pointer;
-  min-width: 100%;
+  min-width: 7rem;
   height: auto;
   padding: 0.65rem 1.25rem;
   border: none;
@@ -111,29 +116,29 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-.a {
+a {
+  display: inline;
   font-family: inherit;
   font-size: 1rem;
   font-weight: 500;
   line-height: inherit;
   cursor: pointer;
-  min-width: 100%;
   height: auto;
   padding: 0.65rem 1.25rem;
   border: none;
   outline: none;
+  max-width: 15rem;
   border-radius: 2rem;
-  color: var(--color-white);
-  background: var(--color-blue);
-  box-shadow: var(--shadow-medium);
+  color: var(--light-orange);
   text-transform: capitalize;
   text-rendering: optimizeLegibility;
 }
 
 .btn {
   flex: 1 1 auto;
-  width: 100%;
-  /* margin: 10px; */
+  /* width: 100%; */
+  max-width: 7rem;
+  margin: 10px;
   padding: 30px;
   text-align: center;
   text-transform: uppercase;
