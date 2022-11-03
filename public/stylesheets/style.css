@@ -103,7 +103,6 @@ img[src = "../images/lexikologo.png"] {
   font-weight: 500;
   line-height: inherit;
   cursor: pointer;
-  min-width: 7rem;
   height: auto;
   padding: 0.65rem 1.25rem;
   border: none;
@@ -139,10 +138,9 @@ a {
 }
 
 .btn {
-  flex: 1 1 auto;
   /* width: 100%; */
   max-width: 7rem;
-  margin: 10px;
+  margin: 5px;
   padding: 30px;
   text-align: center;
   text-transform: uppercase;

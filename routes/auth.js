@@ -20,7 +20,19 @@ passport.use(new LocalStrategy(function verify(username, password, cb) {
         return cb(null, row);
       });
     });
-  }));
+}));
+
+passport.serializeUser(function(user, cb) {
+    process.nextTick(function() {
+        cb(null, { id: user.id, username: user.username });
+    });
+});
+
+passport.deserializeUser(function(user, cb) {
+    process.nextTick(function() {
+        return cb(null, user);
+    });
+});
 
 router.get('/login', function(req, res, next) {
     res.render('login');
@@ -29,7 +41,20 @@ router.get('/login', function(req, res, next) {
 router.post('/login/password', passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/login'
-  }));
+}));
+
+// old way to check if username is in db
+// router.post('/', function(request, response) {
+// var username = request.body.username
+// console.log(username)
+// db.query(`SELECT * FROM users where username = '?'`,username)
+// .then(results => response.json(results))
+// .catch(error => {
+//     console.log(error)
+//     response.json({ error })
+// })
+
+// });
 
 
 module.exports = router;

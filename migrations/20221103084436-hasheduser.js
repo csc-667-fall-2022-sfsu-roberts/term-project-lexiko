@@ -13,11 +13,16 @@ module.exports = {
         },
         username: {
           type: Sequelize.STRING(12),
+          unique: true,
           allowNull: false
         },
-        password: {
-          type: Sequelize.STRING(12),
+        hashedpassword: {
+          type: Sequelize.BLOB,
           allowNull: false,
+        },
+        salt: {
+          type: Sequelize.BLOB,
+          allowNull: false
         },
         email: {
           type: Sequelize.STRING(254),
