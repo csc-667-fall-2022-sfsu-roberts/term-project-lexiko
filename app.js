@@ -33,9 +33,9 @@ app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: false,
-  store: new (require('connect-pg-simple')(session))({
-    // Insert connect-pg-simple options here
-  })
+  // store: new (require('connect-pg-simple')(session))({
+  //   // Insert connect-pg-simple options here
+  // })
 }));
 app.use(passport.authenticate('session'));
 
