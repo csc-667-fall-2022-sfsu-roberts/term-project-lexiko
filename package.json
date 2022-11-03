@@ -12,6 +12,7 @@
     "postinstall": "npx sequelize db:migrate"
   },
   "dependencies": {
+    "connect-pg-simple": "^7.0.0",
     "connect-sqlite3": "^0.9.13",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
