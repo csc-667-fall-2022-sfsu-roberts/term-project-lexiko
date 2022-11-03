@@ -34,7 +34,7 @@ body {
   background: #c2e9fb;
 }
 
-img[src = "./images/lexikologo.png"] {
+img[src = "../images/lexikologo.png"] {
   max-width: 60%;
   padding: 0rem 0rem 2.5rem 0rem;
 }
@@ -51,14 +51,14 @@ img[src = "./images/lexikologo.png"] {
 .wrapper {
   display: flex;
   flex-direction: column;
-  max-width: 28rem;
+  max-width: 24rem;
   align-items: center;
   width: 100%;
   margin: 2rem auto;
   padding: 2rem 2.5rem;
   border: none;
   outline: none;
-  border-radius: 0.5rem;
+  border-radius: 1.5rem;
   color: var(--black);
   background: var(--white);
   box-shadow: var(--shadow-large);
@@ -132,6 +132,10 @@ a {
   color: var(--light-orange);
   text-transform: capitalize;
   text-rendering: optimizeLegibility;
+}
+
+.reset-btn{
+  min-width: 14rem;
 }
 
 .btn {
