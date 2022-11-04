@@ -58,12 +58,15 @@ img[src = "../images/lexikologo.png"] {
   padding: 2rem 2.5rem;
   border: none;
   outline: none;
-  border-radius: 1.5rem;
   color: var(--black);
+  border-radius: 1.5rem;
   background: var(--white);
   box-shadow: var(--shadow-large);
 }
 
+.row-flex {
+  flex-direction: row;
+}
 
 .form{
   display: flex;
@@ -162,4 +165,23 @@ a {
 
 .grad-2 {
   background-image: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%);
+}
+
+.board-wrapper {
+  max-width: 40rem;
+  padding: 30px;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(15, 1fr);
+}
+
+.board-space {
+  background-color: #e6c2a0;
+  border-color: #fff;
+  border-style: solid;
+  border-width: .5px;
+  height: 40px;
+  width: 40px;
 }
