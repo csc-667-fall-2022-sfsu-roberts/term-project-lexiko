@@ -1,7 +1,15 @@
-- var i = 0
+- var s = 0
+- var t = 0
 
 block content
-    .board
-        while i < 225
-            .board-space= i++
-    .hand
+    .wrapper.board-wrapper
+        .board
+            while s < 225
+                .board-space(id=s++)
+                    .board-space-content
+    .wrapper.hand-wrapper
+        .hand
+            while t < 7
+                .hand-space(id = t++)
+                    .tile.hand-tile(draggable="true")
+                        .tile-letter
