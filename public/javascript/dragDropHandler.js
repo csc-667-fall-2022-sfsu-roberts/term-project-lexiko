@@ -6,8 +6,6 @@ gameInfo = {
 }
  */
 
-//let hand 
-
 let tiles = document.querySelectorAll(".tile"); //TODO
 const handSpaces = document.querySelectorAll(".hand-space");
 const boardSpaces = document.querySelectorAll(".board-space");
@@ -37,6 +35,9 @@ function dragStart() {
     this.className += " hold";
     currentTile = this;
     console.log("Picked up tile " + currentTile.firstElementChild.innerText);
+
+    //removeTile();
+
     setTimeout(() => (this.className = "invisible"), 0);
     //console.log("start");
 }
@@ -73,9 +74,9 @@ function dragDrop() {
         this.className = "hand-space";
     } else if(this.className.startsWith("board-space")) {
         this.className = "board-space";
+        placeTile(currentTile.firstElementChild.innerText, (this.id % 15), Math.round(Math.floor(this.id / 15)));
     }
-    this.append(currentTile); //TODO
-    placedTile((this.id % 15), Math.round(Math.floor(this.id / 15)), currentTile.firstElementChild.innerText);
+    this.append(currentTile);
     console.log(currentTile.firstElementChild.innerText + " was dropped at ["+ (this.id % 15) + ", " + Math.round(Math.floor(this.id / 15)) + "]");
     return this.id;
 }

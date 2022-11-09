@@ -1,7 +1,6 @@
 mixin board(gameBoardTiles, handTiles)
     - var s = 0
     - var t = 0
-    - var stuff = [["A", 10],["E", 5],["C", 7],["S", 3],["P", 4],["L", 8],["A", 10]]
 
     include tile
     
@@ -16,4 +15,4 @@ mixin board(gameBoardTiles, handTiles)
                 each tileVal in handTiles
                     .hand-space(id = t++)
                         .hand-tile
-                            +tile(tileVal[0], tileVal[1])
+                            +tile(tileVal[0], tileVal[1], tileVal[2])

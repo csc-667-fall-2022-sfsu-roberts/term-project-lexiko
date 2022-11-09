@@ -5,7 +5,7 @@ var messages = document.getElementById('messages');
 var endturn = document.getElementById('endturn');
 
 
-function placedTile(x, y, tileLabel) {
+function emitPlacedTile(tileLabel, x, y) {
     socket.emit('game event', {"name": "bob", "tile": tileLabel, "xcoord": x, "ycoord": y });
 }
 
