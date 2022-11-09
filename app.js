@@ -18,6 +18,7 @@ var registerRouter = require('./routes/register');
 var authRouter = require('./routes/auth');
 var forgotRouter = require('./routes/forgot');
 var sockettest = require('./routes/sockettest');
+var gameRouter = require('./routes/game');
 
 
 var app = express();
@@ -62,6 +63,7 @@ app.use('/tests', testsRouter);
 // app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/forgot',forgotRouter);
+app.use('/game',gameRouter);
 
 //socket tests
 app.use('/sockettest', sockettest);
