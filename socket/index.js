@@ -17,9 +17,10 @@ const init = ( app, server ) => {
 
     socket.on( USER_JOINED, data => io.emit( USER_JOINED, data ))
     socket.on( "chat message", data => io.emit( "chat message", data ))
+
     socket.on("game event", data => {
-        console.log((data.name + " played " + data.turn + " and ended their turn!"));
-        io.emit("game event", (data.name + " played " + data.turn + " and ended their turn!") )
+        console.log((data.name + " placed " + data.tile + " at [" + data.xcoord + ", " + data.ycoord+ "]"));
+        io.emit("game event", (data.name + " placed " + data.tile + " at [" + data.xcoord + ", " + data.ycoord + "]") )
     })
   })
 }

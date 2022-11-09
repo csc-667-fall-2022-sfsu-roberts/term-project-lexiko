@@ -1,0 +1,10 @@
+mixin chat(msg)
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    div
+        #main-content
+        ul#messages
+        form#form(action='')
+            input#input(autocomplete='off')
+            button Send
+            button#endturn End Turn
+    script(src='javascripts/client-dist/socket.io.js')

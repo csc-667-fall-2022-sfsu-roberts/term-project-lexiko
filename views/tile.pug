@@ -1,3 +1,4 @@
-.tile
-    .tile-letter A
-    .tile-points 10
+mixin tile(letter, points)
+    .tile(draggable="true")
+        .tile-letter= letter
+        .tile-points= points

@@ -14,7 +14,7 @@ const boardSpaces = document.querySelectorAll(".board-space");
 var currentTile;
 
 for(const tile of tiles) {
-    console.log(tile.id)
+    //console.log(tile.firstElementChild.innerText)
     tile.addEventListener("dragstart", dragStart);
     tile.addEventListener("dragend", dragEnd);
 }
@@ -36,27 +36,27 @@ for(const handSpace of handSpaces) {
 function dragStart() {
     this.className += " hold";
     currentTile = this;
-    console.log("Picked up tile " + currentTile.id);
+    console.log("Picked up tile " + currentTile.firstElementChild.innerText);
     setTimeout(() => (this.className = "invisible"), 0);
-    console.log("start");
+    //console.log("start");
 }
 
 function dragEnd() {
     this.className = "tile";
     //check if hand tile or board tile
     this.className += " hand-tile";
-    console.log("end");
+    //console.log("end");
 }
 
 function dragOver(e) {
     e.preventDefault();
-    console.log("over");
+    //console.log("over");
 }
 
 function dragEnter(e) {
     e.preventDefault();
     this.className += " hovered";
-    console.log("enter");
+    //console.log("enter");
 }
 
 function dragLeave(e) {
@@ -65,7 +65,7 @@ function dragLeave(e) {
     } else if(this.className.startsWith("board-space")) {
         this.className = "board-space";
     }
-    console.log("leave");
+    //console.log("leave");
 }
 
 function dragDrop() {
@@ -75,6 +75,7 @@ function dragDrop() {
         this.className = "board-space";
     }
     this.append(currentTile); //TODO
-    console.log("drop at ["+ (this.id % 15) + ", " + Math.round(Math.floor(this.id / 15)) + "]");
+    placedTile((this.id % 15), Math.round(Math.floor(this.id / 15)), currentTile.firstElementChild.innerText);
+    console.log(currentTile.firstElementChild.innerText + " was dropped at ["+ (this.id % 15) + ", " + Math.round(Math.floor(this.id / 15)) + "]");
     return this.id;
 }

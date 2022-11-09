@@ -238,6 +238,12 @@ body { margin: 0; padding-bottom: 3rem; font-family: -apple-system, BlinkMacSyst
   height: 40px;
 }
 
+.board-tile .hand-tile {
+  width: 40px;
+  height: 40px;
+  border: #000;
+}
+
 .board-tile .tile-letter {
   font-size: 20px;
 }
