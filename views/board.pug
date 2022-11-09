@@ -6,10 +6,11 @@ block content
         .board
             while s < 225
                 .board-space(id=s++)
-                    .board-space-content
+                    .board-tile
+                        include tile
     .wrapper.hand-wrapper
         .hand
             while t < 7
                 .hand-space(id = t++)
-                    .tile.hand-tile(draggable="true")
-                        .tile-letter
+                    .hand-tile(draggable="true")
+                        include tile

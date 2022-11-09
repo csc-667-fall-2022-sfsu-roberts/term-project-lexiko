@@ -8,7 +8,7 @@ gameInfo = {
 
 //let hand 
 
-let tiles = document.querySelectorAll(".tile");
+let tiles = document.querySelectorAll(".tile"); //TODO
 const handSpaces = document.querySelectorAll(".hand-space");
 const boardSpaces = document.querySelectorAll(".board-space");
 
@@ -70,6 +70,7 @@ function dragDrop() {
     } else if(this.className.startsWith("board-space")) {
         this.className = "board-space";
     }
-    this.append(tiles);
-    console.log("drop");
+    this.append(tiles); //TODO
+    console.log("drop"+this.id);
+    return this.id;
 }
