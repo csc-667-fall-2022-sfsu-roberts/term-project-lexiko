@@ -74,7 +74,11 @@ function dragDrop() {
     } else if(this.className.startsWith("board-space")) {
         this.className = "board-space";
     }
-    this.append(currentTile); //TODO
+    let boardTile = document.createElement("div");
+    boardTile.className = "tile";
+    boardTile.id = currentTile.id;
+    this.append(boardTile); //TODO
+    handSpaces
     console.log("drop at ["+ (this.id % 15) + ", " + Math.round(Math.floor(this.id / 15)) + "]");
     return this.id;
 }
