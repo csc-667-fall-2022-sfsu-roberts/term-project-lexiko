@@ -1,15 +1,21 @@
 extends layout
 
+include board
+include chat
+include leaderboard
+
 block content
     .container.row-flex
         .game-lobby-left
             .game-id.row-flex
-                game-name
-                game-id
-            include board.pug
+                gameName
+                gameId
+            +board(gameBoardTiles, handTiles)
         .game-lobby-right
             .wrapper
-                include leaderboard.pug
+                +leaderboard(playerScores)
             .wrapper
-                include game-chat.pug
-    script(src="/javascript/game.js")
+                +chat("oh hi")
+    script(src="/javascript/gameLogic.js")
+    script(src="/javascript/dragDropHandler.js")
+    script(src="/javascript/chat.js")

@@ -6,15 +6,13 @@ gameInfo = {
 }
  */
 
-//let hand 
-
 let tiles = document.querySelectorAll(".tile"); //TODO
 const handSpaces = document.querySelectorAll(".hand-space");
 const boardSpaces = document.querySelectorAll(".board-space");
 var currentTile;
 
 for(const tile of tiles) {
-    console.log(tile.id)
+    //console.log(tile.firstElementChild.innerText)
     tile.addEventListener("dragstart", dragStart);
     tile.addEventListener("dragend", dragEnd);
 }
@@ -36,27 +34,30 @@ for(const handSpace of handSpaces) {
 function dragStart() {
     this.className += " hold";
     currentTile = this;
-    console.log("Picked up tile " + currentTile.id);
+    console.log("Picked up tile " + currentTile.firstElementChild.innerText);
+
+    //removeTile();
+
     setTimeout(() => (this.className = "invisible"), 0);
-    console.log("start");
+    //console.log("start");
 }
 
 function dragEnd() {
     this.className = "tile";
     //check if hand tile or board tile
     this.className += " hand-tile";
-    console.log("end");
+    //console.log("end");
 }
 
 function dragOver(e) {
     e.preventDefault();
-    console.log("over");
+    //console.log("over");
 }
 
 function dragEnter(e) {
     e.preventDefault();
     this.className += " hovered";
-    console.log("enter");
+    //console.log("enter");
 }
 
 function dragLeave(e) {
@@ -65,7 +66,7 @@ function dragLeave(e) {
     } else if(this.className.startsWith("board-space")) {
         this.className = "board-space";
     }
-    console.log("leave");
+    //console.log("leave");
 }
 
 function dragDrop() {
@@ -73,12 +74,18 @@ function dragDrop() {
         this.className = "hand-space";
     } else if(this.className.startsWith("board-space")) {
         this.className = "board-space";
+        placeTile(currentTile.firstElementChild.innerText, (this.id % 15), Math.round(Math.floor(this.id / 15)));
     }
+<<<<<<< HEAD:public/javascript/game.js
     let boardTile = document.createElement("div");
     boardTile.className = "tile";
     boardTile.id = currentTile.id;
     this.append(boardTile); //TODO
     handSpaces
     console.log("drop at ["+ (this.id % 15) + ", " + Math.round(Math.floor(this.id / 15)) + "]");
+=======
+    this.append(currentTile);
+    console.log(currentTile.firstElementChild.innerText + " was dropped at ["+ (this.id % 15) + ", " + Math.round(Math.floor(this.id / 15)) + "]");
+>>>>>>> 2e278b2dc01f227eebb2855f4b204b898f34a060:public/javascript/dragDropHandler.js
     return this.id;
 }
