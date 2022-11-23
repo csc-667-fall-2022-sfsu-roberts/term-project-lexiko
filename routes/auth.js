@@ -1,60 +1,63 @@
 var express = require('express');
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
-var crypto = require('crypto');
+var crypto = import('crypto');
+var bcrypt = require('bcrypt')
 var db = require('../db');
 var router = express.Router()
+const saltRounds = 10;
 
+const Users = require("../db/users")
 
-
-passport.use(new LocalStrategy(function verify(username, password, cb) {
-    db.get('SELECT * FROM users WHERE username = ?', [ username ], function(err, row) {
-      if (err) { return cb(err); }
-      if (!row) { return cb(null, false, { message: 'Incorrect username or password.' }); }
-  
-      crypto.pbkdf2(password, row.salt, 310000, 32, 'sha256', function(err, hashedPassword) {
-        if (err) { return cb(err); }
-        if (!crypto.timingSafeEqual(row.hashed_password, hashedPassword)) {
-          return cb(null, false, { message: 'Incorrect username or password.' });
-        }
-        return cb(null, row);
-      });
-    });
-}));
-
-passport.serializeUser(function(user, cb) {
-    process.nextTick(function() {
-        cb(null, { id: user.id, username: user.username });
-    });
-});
-
-passport.deserializeUser(function(user, cb) {
-    process.nextTick(function() {
-        return cb(null, user);
-    });
-});
 
 router.get('/login', function(req, res, next) {
     res.render('login');
 });
 
-router.post('/login/password', passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login'
-}));
+router.get('/register', function(req, res, next) {
+    res.render('register', { title: 'Register' });
+});
 
-// old way to check if username is in db
-// router.post('/', function(request, response) {
-// var username = request.body.username
-// console.log(username)
-// db.query(`SELECT * FROM users where username = '?'`,username)
-// .then(results => response.json(results))
-// .catch(error => {
-//     console.log(error)
-//     response.json({ error })
-// })
 
-// });
+router.post('/login', (req, res, next) => {
+    const {username, password} = req.body;
+    const {sessionID} = req.sessionID
+    req.session.authenticated = true;
+    req.session.username = username;
+    res.redirect("/lobby")
+    // res.render('index', { name: "Jon" });
+});
 
+
+router.post('/register', async (req, res) => {
+    User.register({username, password})
+    
+    .catch((error) => {
+        console.log({error})
+    })
+  });
+  
+//   router.post('/register', async (req, res) => {
+
+//     const hashed_password = await bcrypt.hash(req.body.password, saltRounds)
+//     const username = req.body.username
+//     const email = req.body.email
+//     console.log(username, hashed_password)
+//     // Check if username already exists
+//     db.any('SELECT username from users where username = $1', [username])
+//       .then(results => {
+//         if (results.length == 0) {
+//           console.log("user doesn't exist")
+//           db.any('INSERT INTO users (username, hashedpassword, email) VALUES ($1, $2, $3)',[username, hashed_password, email]).then(_ => db.any('SELECT * FROM users'))
+//           .then(res.redirect('/auth/login'))
+//         }
+//         else {
+//           console.log("username already exists")
+//           res.redirect('/register');
+//         }
+//       }
+//       )
+  
+//   });
 
 module.exports = router;

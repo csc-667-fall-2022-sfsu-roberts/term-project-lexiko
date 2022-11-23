@@ -30,11 +30,6 @@ const { QueryTypes } = require("sequelize");
 //         }
 //       }
 router.get("/", (request, response) => {
-    var salt = crypto.randomBytes(16);
-    var sql = 'INSERT INTO users (username, "hashedpassword", "salt", "email") VALUES ($1, $2, $3, $4)'
-    var testuser =  'jontseg'
-    var testpassword = crypto.pbkdf2Sync('letmein', salt, 310000, 32, 'sha256')
-    var testemail = 'jontseg@gmail.com'
  
         db.any('SELECT * FROM users')
         .then(results => response.json(results))

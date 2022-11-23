@@ -4,23 +4,28 @@ if (process.env.NODE_ENV === 'development') {
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+const sessionInstance = require("./app-config/session-config");
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var passport = require('passport');
 var session = require('express-session');
-// const pgSession = require('connect-pg-simple')(session);
+const pg = require('pg');
+var router = express.Router()
+const db = require('./db')
+const protect = require("./app-config/protect")
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var testsRouter = require('./routes/tests');
-// var loginRouter = require('./routes/login');
-var registerRouter = require('./routes/register');
-var authRouter = require('./routes/auth');
+var lobbyRouter = require('./routes/lobby');
+
+var authRoute = require('./routes/auth');
 var forgotRouter = require('./routes/forgot');
 
 
 var app = express();
 // view engine setup
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
@@ -29,27 +34,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: false,
-  store: new (require('connect-pg-simple')(session))({
-    // Insert connect-pg-simple options here
-  })
-}));
-app.use(passport.authenticate('session'));
+app.use(sessionInstance);
 
 
 app.use('/', indexRouter);
-app.use('/auth',authRouter);
 app.use('/users', usersRouter);
 app.use('/tests', testsRouter);
-// app.use('/login', loginRouter);
-app.use('/register', registerRouter);
+app.use('/lobby', protect, lobbyRouter);
+app.use('/auth', authRoute);
 app.use('/forgot',forgotRouter);
 
-
-// catch 404 and forward to error handler
+// // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });

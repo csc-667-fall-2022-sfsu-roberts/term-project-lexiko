@@ -20,10 +20,6 @@ module.exports = {
           type: Sequelize.BLOB,
           allowNull: false,
         },
-        salt: {
-          type: Sequelize.BLOB,
-          allowNull: false
-        },
         email: {
           type: Sequelize.STRING(254),
           allowNull: false

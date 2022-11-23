@@ -3,12 +3,12 @@ block content
     .container
         .wrapper
             img(src="../images/lexikologo.png", alt="")
-            form(method="POST", action="/login/password")
+            form(method="POST", action="/auth/login")
                 .input-control
-                    label.input-label(for = "username", hidden = "") Username: 
+                    label(for = "username", hidden = "") Username: 
                     input.input-field(id = "username", autocomplete="username", type = "text", name = "username", placeholder = "Username", required autofocus)
                 .input-control
-                    label.input-label(for = "current-password", hidden = "") Password: 
+                    label(for = "current-password", hidden = "") Password: 
                     input.input-field(id = "current-password", autocomplete="password", type = "password", name = "password", placeholder = "Password", required autofocus)
                 .input-control
                     input.btn.input-submit.grad-1(type = "submit", name = "login", value="Login")
