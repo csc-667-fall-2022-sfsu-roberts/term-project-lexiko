@@ -1,29 +1,31 @@
+
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const sessionInstance = require("./app-config/session-config");
+var cookieParser = require('cookie-parser');
+const logger = require('morgan');
+// var session = require('express-session');
+const pg = require('pg');
+var router = express.Router();
+const protect = require("./app-config/protect");
+
 if (process.env.NODE_ENV === 'development') {
   require("dotenv").config();
 }
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-const sessionInstance = require("./app-config/session-config");
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var session = require('express-session');
-const pg = require('pg');
-var router = express.Router()
-const db = require('./db')
-const protect = require("./app-config/protect")
 
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var testsRouter = require('./routes/tests');
-var lobbyRouter = require('./routes/lobby');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const testsRouter = require('./routes/tests');
+const lobbyRouter = require('./routes/lobby');
+const authRouter = require('./routes/auth');
+const forgotRouter = require('./routes/forgot');
 
-var authRoute = require('./routes/auth');
-var forgotRouter = require('./routes/forgot');
+
+const app = express();
 
 
-var app = express();
 // view engine setup
 
 app.set('views', path.join(__dirname, 'views'));
@@ -38,10 +40,10 @@ app.use(sessionInstance);
 
 
 app.use('/', indexRouter);
+app.use('/lobby', protect, lobbyRouter);
 app.use('/users', usersRouter);
 app.use('/tests', testsRouter);
-// app.use('/lobby', protect, lobbyRouter);
-app.use('/auth', authRoute);
+app.use('/auth', authRouter);
 app.use('/forgot',forgotRouter);
 
 // // catch 404 and forward to error handler

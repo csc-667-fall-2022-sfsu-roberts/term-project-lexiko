@@ -11,11 +11,11 @@ const Users = require("../db/users")
 
 
 router.get('/login', (req, res) => {
-    res.render('login');
+    res.render('public/login');
 });
 
 router.get('/register', (req, res) => {
-    res.render('register', { title: 'Register' });
+    res.render('public/register', { title: 'Register' });
 });
 
 
@@ -25,8 +25,8 @@ router.post('/login', (req, res) => {
     console.log(sessionID)
     req.session.authenticated = true;
     req.session.username = username;
-    res.redirect("/");
     // res.redirect("/lobby")
+    res.redirect("/lobby");
     // res.render('index', { name: "Jon" });
 });
 
@@ -37,8 +37,8 @@ router.post('/register', (req, res) => {
     console.log(sessionID)
     req.session.authenticated = true;
     req.session.username = username;
-    res.redirect("/");
-    // res.redirect("/lobby")
+    // res.redirect("/");
+    res.redirect("protected/lobby");
     // res.render('index', { name: "Jon" });
 });
 

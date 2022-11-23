@@ -4,9 +4,9 @@ const protect = (req, res, next) => {
     if (req.session.authenticated){
         next();
     } else {
-        response.redirect("/login");
+        res.redirect("/auth/login");
     }
-}
+};
 
 
 module.exports = protect

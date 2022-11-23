@@ -5,7 +5,7 @@ var router = express.Router();
 router.get("/", (req, res, ) => {
   const {username} = req.session;
   const {sessionID} = req
-  res.render('index', { username, sessionID });
+  res.render('public/index', { username, sessionID });
 });
 
 module.exports = router;
