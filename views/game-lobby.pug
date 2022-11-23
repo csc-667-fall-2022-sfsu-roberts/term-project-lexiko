@@ -1,0 +1,21 @@
+extends layout
+
+include board
+include chat
+include leaderboard
+
+block content
+    .container.row-flex
+        .game-lobby-left
+            .game-id.row-flex
+                gameName
+                gameId
+            +board(gameBoardTiles, handTiles)
+        .game-lobby-right
+            .wrapper
+                +leaderboard(playerScores)
+            .wrapper
+                +chat("oh hi")
+    script(src="/javascript/gameLogic.js")
+    script(src="/javascript/dragDropHandler.js")
+    script(src="/javascript/chat.js")
