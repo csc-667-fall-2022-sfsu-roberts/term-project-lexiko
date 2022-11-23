@@ -10,32 +10,46 @@ const saltRounds = 10;
 const Users = require("../db/users")
 
 
-router.get('/login', function(req, res, next) {
+router.get('/login', (req, res) => {
     res.render('login');
 });
 
-router.get('/register', function(req, res, next) {
+router.get('/register', (req, res) => {
     res.render('register', { title: 'Register' });
 });
 
 
-router.post('/login', (req, res, next) => {
+router.post('/login', (req, res) => {
     const {username, password} = req.body;
-    const {sessionID} = req.sessionID
+    const {sessionID} = req
+    console.log(sessionID)
     req.session.authenticated = true;
     req.session.username = username;
-    res.redirect("/lobby")
+    res.redirect("/");
+    // res.redirect("/lobby")
     // res.render('index', { name: "Jon" });
 });
 
 
-router.post('/register', async (req, res) => {
-    User.register({username, password})
+router.post('/register', (req, res) => {
+    const {username, password} = req.body;
+    const {sessionID} = req
+    console.log(sessionID)
+    req.session.authenticated = true;
+    req.session.username = username;
+    res.redirect("/");
+    // res.redirect("/lobby")
+    // res.render('index', { name: "Jon" });
+});
+
+
+// router.post('/register', async (req, res) => {
+//     User.register({username, password})
     
-    .catch((error) => {
-        console.log({error})
-    })
-  });
+//     .catch((error) => {
+//         console.log({error})
+//     })
+//   });
   
 //   router.post('/register', async (req, res) => {
 

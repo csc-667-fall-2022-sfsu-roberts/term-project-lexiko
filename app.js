@@ -40,7 +40,7 @@ app.use(sessionInstance);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/tests', testsRouter);
-app.use('/lobby', protect, lobbyRouter);
+// app.use('/lobby', protect, lobbyRouter);
 app.use('/auth', authRoute);
 app.use('/forgot',forgotRouter);
 
