@@ -7,7 +7,8 @@ var db = require('../db');
 var router = express.Router()
 const saltRounds = 10;
 
-const Users = require("../db/users")
+const Users = require("../db/users");
+const { request } = require('http');
 
 
 router.get('/login', (req, res) => {
@@ -32,14 +33,20 @@ router.post('/login', (req, res) => {
 
 
 router.post('/register', (req, res) => {
-    const {username, password} = req.body;
-    const {sessionID} = req
-    console.log(sessionID)
-    req.session.authenticated = true;
-    req.session.username = username;
-    // res.redirect("/");
-    res.redirect("protected/lobby");
-    // res.render('index', { name: "Jon" });
+    const {username, password, email} = req.body;
+    const hashedpassword = password
+    console.log(hashedpassword)
+    Users.register({username, hashedpassword, email})
+        .then(({id, username}) => {
+            req.session.authenticated = true;
+            req.session.userID = id;
+            req.session.username = username;
+            res.redirect("/lobby");
+        })
+        .catch(error => {
+            console.log({ error });
+            res.redirect("/register");
+        });  
 });
 
 

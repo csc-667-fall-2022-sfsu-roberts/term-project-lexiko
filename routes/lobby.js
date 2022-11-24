@@ -20,10 +20,9 @@
 
 var express = require('express');
 var router = express.Router()
-const protect = require("../app-config/protect")
 
 
-router.get('/', protect, (req, res) => {
+router.get('/', (req, res) => {
     const {sessionID} = req;
     const {username} = req.session;
 
