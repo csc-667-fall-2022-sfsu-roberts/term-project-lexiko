@@ -3,12 +3,12 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const sessionInstance = require("./app-config/session-config");
-var cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-// var session = require('express-session');
-const pg = require('pg');
-var router = express.Router();
+// const pg = require('pg');
 const protect = require("./app-config/protect");
+
+
 
 if (process.env.NODE_ENV === 'development') {
   require("dotenv").config();
@@ -16,7 +16,7 @@ if (process.env.NODE_ENV === 'development') {
 
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+// const usersRouter = require('./routes/users');
 const testsRouter = require('./routes/tests');
 const lobbyRouter = require('./routes/lobby');
 const authRouter = require('./routes/auth');
@@ -42,7 +42,7 @@ app.use(sessionInstance);
 
 app.use('/', indexRouter);
 app.use('/lobby', protect, lobbyRouter);
-app.use('/users', usersRouter);
+// app.use('/users', usersRouter);
 app.use('/tests', testsRouter);
 app.use('/auth', authRouter);
 app.use('/forgot',forgotRouter);
