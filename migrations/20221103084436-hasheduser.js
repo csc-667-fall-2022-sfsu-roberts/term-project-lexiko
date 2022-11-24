@@ -16,8 +16,8 @@ module.exports = {
           unique: true,
           allowNull: false
         },
-        hashedpassword: {
-          type: Sequelize.BLOB,
+        password: {
+          type: Sequelize.STRING,
           allowNull: false,
         },
         email: {

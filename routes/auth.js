@@ -13,40 +13,40 @@ const { request } = require('http');
 
 router.get('/login', (req, res) => {
     res.render('public/login');
+
 });
 
 router.get('/register', (req, res) => {
     res.render('public/register', { title: 'Register' });
 });
 
+const handleLogin = (req,res) => ({id, username }) => {
+    req.session.authenticated = true;
+    req.session.userID = id;
+    req.session.username = username;
+    res.redirect("/lobby");
+};
+
+const handleLoginError = (res, redirectUri) => 
+    (error) => {
+        console.log({ error });
+        res.redirect(redirectUri);
+    };
+
 
 router.post('/login', (req, res) => {
     const {username, password} = req.body;
-    const {sessionID} = req
-    console.log(sessionID)
-    req.session.authenticated = true;
-    req.session.username = username;
-    // res.redirect("/lobby")
-    res.redirect("/lobby");
-    // res.render('index', { name: "Jon" });
+    Users.login({username, passsword})
+    .then(handleLogin(req,res))
+    .catch(handleLoginError(res, "/auth/login"));
 });
 
 
 router.post('/register', (req, res) => {
     const {username, password, email} = req.body;
-    const hashedpassword = password
-    console.log(hashedpassword)
-    Users.register({username, hashedpassword, email})
-        .then(({id, username}) => {
-            req.session.authenticated = true;
-            req.session.userID = id;
-            req.session.username = username;
-            res.redirect("/lobby");
-        })
-        .catch(error => {
-            console.log({ error });
-            res.redirect("/auth/register");
-        });  
+    Users.register({username, password, email})
+        .then(handleLogin(req,res))
+        .catch(handleLoginError(res, "/auth/register"))
 });
 
 
