@@ -45,7 +45,7 @@ router.post('/register', (req, res) => {
         })
         .catch(error => {
             console.log({ error });
-            res.redirect("/register");
+            res.redirect("/auth/register");
         });  
 });
 

@@ -24,9 +24,9 @@ var router = express.Router()
 
 router.get('/', (req, res) => {
     const {sessionID} = req;
-    const {username} = req.session;
+    const {username, userID} = req.session;
 
-    res.render('protected/lobby', {username, sessionID});
+    res.render('protected/lobby', {username, userID});
 });
 
 
