@@ -1,13 +1,13 @@
 extends layout
 
 block content
-  h1= title
+  h1= Lobby
   if username 
-    h2 Welcome #{username}
-  p Welcome to #{title} (#{userID})
-
+    h2 Welcome #{username} (#{userID})
   li 
       a(href="/") Homepage
 
 block footer
-  script(src="/socket.io")
+  script(src="/socket.io/socket.io.js")
+  script(src="/javascripts/socket-test.js")
+  

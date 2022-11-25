@@ -11,6 +11,7 @@ const init = (httpServer, app) => {
 
     io.use((socket, next) => {
         const session = socket.request.session;
+
         if (session && session.authenticated) {
             next();
         } else {
@@ -19,7 +20,10 @@ const init = (httpServer, app) => {
     });
 
     io.on("connection", (socket) => {
-        console.log("Connection happened");
+        console.log({
+            message: "Connection happened",
+            session: socket.request.session,
+        });
     })
 
     app.io = io;
