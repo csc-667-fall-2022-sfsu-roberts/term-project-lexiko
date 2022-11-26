@@ -1,16 +1,18 @@
 extends layout
 
-include board
+include testBoard
 include chat
 include leaderboard
+include debugger
 
 block content
+    +debugger(this)
     .container.row-flex
         .game-lobby-left
             .game-id.row-flex
                 gameName
                 gameId
-            +board(this)
+            +testBoard(this)
         .game-lobby-right
             .wrapper
                 +leaderboard(players)

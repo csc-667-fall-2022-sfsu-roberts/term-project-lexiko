@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const Game = require('../models/game.js');
 
 function getRandom(arr, n) {
   var result = new Array(n),
@@ -11,9 +12,9 @@ function getRandom(arr, n) {
       taken[x] = --len in taken ? taken[len] : len;
   }
   return result;
-}
+};
 
-var rawTileList = {
+var rawTileList = [
     { "letter": "a", "points":  1, "tiles":  9 },
     { "letter": "b", "points":  3, "tiles":  2 },
     { "letter": "c", "points":  3, "tiles":  2 },
@@ -39,14 +40,14 @@ var rawTileList = {
     { "letter": "w", "points":  4, "tiles":  2 },
     { "letter": "x", "points":  8, "tiles":  1 },
     { "letter": "y", "points":  4, "tiles":  2 },
-    { "letter": "z", "points": 10, "tiles":  1 },
+    { "letter": "z", "points": 10, "tiles":  1 }
     //" ": { "tiles": 2}
-}
+];
 
 var fullTileList = new Array();
 
 let tileId = 0;
-for(const tileData of Object.entries(rawTileList)) {
+for(const tileData of rawTileList) {
   for(let multiples = 0; multiples < tileData["tiles"]; multiples++) {
     fullTileList[tileId] = [tileData["letter"], tileData["points"], tileId];
     tileId++;
@@ -59,15 +60,20 @@ for(const tileData of Object.entries(rawTileList)) {
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-  let randomHand = getRandom(fullTileList, 7);
+  // let randomHand = getRandom(fullTileList, 7);
 
-  var someData = {
-    gameBoardTiles: {},
-    handTiles: randomHand, //[["X", 10, 1],["E", 5, 2],["C", 7, 3],["S", 3, 4],["P", 4, 5],["L", 8, 6],["A", 10, 7]],
-    playerScores: [["person", 54], ["player", 40], ["guy", 30]]
-  }
+  // var someData = {
+  //   gameBoardTiles: {},
+  //   handTiles: randomHand, //[["X", 10, 1],["E", 5, 2],["C", 7, 3],["S", 3, 4],["P", 4, 5],["L", 8, 6],["A", 10, 7]],
+  //   playerScores: [["person", 54], ["player", 40], ["guy", 30]]
+  // }
 
-  res.render('game-lobby', someData);
+  // res.render('game-lobby', someData);
+  var game = new Game();
+  game.gameSetup();
+  // console.log(game);
+  // console.log(game.players[game.sessionPlayer].hand);
+  res.render('test', game);
   });
 
 module.exports = router;

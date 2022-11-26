@@ -1,6 +1,6 @@
-mixin board(gameBoardTiles, handTiles)
-    - var s = 0
-    - var t = 0
+mixin board(board)
+    - var b = 0
+    - var h = 0
 
     include tile
     
@@ -8,11 +8,11 @@ mixin board(gameBoardTiles, handTiles)
         .wrapper.board-wrapper
             .board
                 while s < 225
-                    .board-space(id=s++)
+                    .board-space(id=b++)
                         .board-tile
         .wrapper.hand-wrapper
             .hand
                 each tileVal in handTiles
-                    .hand-space(id = t++)
+                    .hand-space(id = h++)
                         .hand-tile
                             +tile(tileVal[0], tileVal[1], tileVal[2])

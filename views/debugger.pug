@@ -1,0 +1,24 @@
+mixin debugger(game)
+    .debugger.wrapper
+        p Board
+        .show-button#show-debugger-board
+        #debugger-board(style="display: none;")
+            each space in board
+                p #{space.id} (x: #{space.id%15}, y: #{Math.floor(space.id/15)}): #{space.tile}
+        p Bag
+        .show-button#show-debugger-bag
+        #debugger-bag(style="display: none;")
+            p Number of tiles: #{bag.length}
+            each tile in bag
+                p #{tile.id}: #{tile.letter}
+        p Players
+        .show-button#show-debugger-players
+        #debugger-players(style="display: none;")
+            each player in players
+                p #{player.id} #{player.name}: score(#{player.score})
+                .pick-player(id=`player${player.id}`)
+                p Hand
+                each tile in player.hand
+                    p #{tile.id}: #{tile.letter}
+
+    script(src="/javascript/debugger.js")

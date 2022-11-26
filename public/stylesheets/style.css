@@ -233,12 +233,12 @@ body { margin: 0; padding-bottom: 3rem; font-family: -apple-system, BlinkMacSyst
   position: relative;
 }
 
-.board-tile .tile {
-  width: 40px;
-  height: 40px;
+.board-space .tile {
+  scale: .8;
+  transform: translate(-6px,-6px);
 }
 
-.board-tile .hand-tile {
+/* .board-tile .hand-tile {
   width: 40px;
   height: 40px;
   border: #000;
@@ -254,7 +254,7 @@ body { margin: 0; padding-bottom: 3rem; font-family: -apple-system, BlinkMacSyst
 
 .hand-tile .tile-letter {
   font-size: 30px;
-}
+} */
 
 .tile-letter {
   text-align: center;
@@ -295,3 +295,25 @@ body { margin: 0; padding-bottom: 3rem; font-family: -apple-system, BlinkMacSyst
   display: none;
 }
 
+.debugger {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 200px;
+}
+
+.debugger p {
+  margin: 0;
+}
+
+.show-button {
+  background-color: #000;
+  width: 30px;
+  height: 30px;
+}
+
+.pick-player {
+  background-color: blue;
+  width: 30px;
+  height: 30px;
+}

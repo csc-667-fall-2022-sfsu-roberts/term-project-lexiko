@@ -6,7 +6,7 @@ gameInfo = {
 }
  */
 
-let tiles = document.querySelectorAll(".tile"); //TODO
+let tiles = document.querySelectorAll(".tile"); //TODO only make movable tiles
 const handSpaces = document.querySelectorAll(".hand-space");
 const boardSpaces = document.querySelectorAll(".board-space");
 var currentTile;
@@ -70,22 +70,22 @@ function dragLeave(e) {
 }
 
 function dragDrop() {
+    if(this.firstChild) {
+        console.log("This space is occupied");
+        if(this.className.startsWith("hand-space")) {
+            this.className = "hand-space";
+        } else if(this.className.startsWith("board-space")) {
+            this.className = "board-space";
+        }
+        return;
+    }
     if(this.className.startsWith("hand-space")) {
         this.className = "hand-space";
     } else if(this.className.startsWith("board-space")) {
         this.className = "board-space";
         placeTile(currentTile.firstElementChild.innerText, (this.id % 15), Math.round(Math.floor(this.id / 15)));
     }
-<<<<<<< HEAD:public/javascript/game.js
-    let boardTile = document.createElement("div");
-    boardTile.className = "tile";
-    boardTile.id = currentTile.id;
-    this.append(boardTile); //TODO
-    handSpaces
-    console.log("drop at ["+ (this.id % 15) + ", " + Math.round(Math.floor(this.id / 15)) + "]");
-=======
     this.append(currentTile);
     console.log(currentTile.firstElementChild.innerText + " was dropped at ["+ (this.id % 15) + ", " + Math.round(Math.floor(this.id / 15)) + "]");
->>>>>>> 2e278b2dc01f227eebb2855f4b204b898f34a060:public/javascript/dragDropHandler.js
     return this.id;
 }

@@ -14,7 +14,7 @@ const tilesPlaced = new Array();
 class Board {
     constructor(){
         this.table = new Array();
-        this.blank();
+        //this.blank();
     }
 
     fromTable(gameBoard) {

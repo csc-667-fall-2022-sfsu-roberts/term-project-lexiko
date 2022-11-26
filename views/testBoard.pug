@@ -1,0 +1,18 @@
+mixin testBoard(game)
+    - var h = 0
+
+    include tile
+    
+    block content
+        .wrapper.board-wrapper
+            .board
+                each space in board
+                    .board-space(id=space.id)
+                        if space.tile
+                            +tile(space.tile.id, space.tile.letter, tiles.get(space.tile.letter).points, "false")
+        .wrapper.hand-wrapper
+            .hand
+                while h < 7
+                    .hand-space(id=h++)
+                        if(players[sessionPlayer].hand[h-1])
+                            +tile(players[sessionPlayer].hand[h-1].id, players[sessionPlayer].hand[h-1].letter, tiles.get(players[sessionPlayer].hand[h-1].letter).points, "true")
