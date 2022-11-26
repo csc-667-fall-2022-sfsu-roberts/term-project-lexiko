@@ -7,10 +7,16 @@ block content
   li 
       a(href="/") Homepage
 
+  
+  template#message
+    span.sender
+    span.content
+    span.timestamp
+
   #chat
     #messages
-    #send 
-      input(type="text" id="message")
+    #send
+      input(type="text" id="message-field")
 
 block footer
   script(src="/socket.io/socket.io.js")

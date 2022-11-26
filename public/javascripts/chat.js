@@ -1,19 +1,30 @@
 const socket = io();
 
-document.querySelector("#message").addEventListener("keydown", (event) => {
-    console.log(event);
-    if (event.keycode === 13) {
-        fetch("/chat/0", {
-            method: "post",
-            body: JSON.stringify({message: event.target.value}),
-        })
+document
+  .querySelector("#message-field")
+  .addEventListener("keydown", (event) => {
+    if (event.keyCode === 13) {
+      fetch("/chat/0", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: event.target.value }),
+      })
         .then(() => {
-            document.querySelector("#message").value = "";
+          document.querySelector("#message-field").value = "";
         })
-        .catch((error) => console.log(error))
+        .catch((error) => console.log(error));
     }
-})
+  });
 
-socket.on("chat:0", ({ sender, message, timestamp }) =>{
-    console.log({ sender, message, timestamp })
-})
+const messages = document.querySelector("#messages");
+
+socket.on("chat:0", ({ sender, message, timestamp }) => {
+  const template = document.querySelector("#message");
+
+  const content = template.content.cloneNode(true);
+  content.querySelector(".sender").innerText = sender;
+  content.querySelector(".content").innerText = message;
+  content.querySelector(".timestamp").innerText = timestamp;
+
+  messages.appendChild(content);
+});
