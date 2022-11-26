@@ -442,8 +442,7 @@ section {
 } */
 
 nav {
-  /* color:black; */
-  width: 100%;
+  /* width: 100%; */
   background-color: #444;
   padding-left: 30px;
   padding-right: 10px;
@@ -469,11 +468,7 @@ nav {
 }
 
 .nav-item:hover {
-  background-color: white;
-}
-
-.nav-item:hover a {
-  color: darkgreen;
+  background-color: #111;
 }
 
 .logo img {
