@@ -116,7 +116,8 @@ function validateMove() {
 
     if (xvalid) {
         console.log("Aligned in the x direction");
-    } else if (yvalid) {
+    }
+    if (yvalid) {
         console.log("Aligned in the y direction");
     }
 

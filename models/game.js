@@ -52,10 +52,10 @@ class Game {
         for (let i = 0; i < 225; i++) {
             this.board[i] = new Space(i);
         }
-        this.board[185].tile = new Tile(-1, "s");
-        this.board[200].tile = new Tile(-1, "a");
-        this.board[205].tile = new Tile(-1, "b");
-        this.board[170].tile = new Tile(-1, "p");
+        this.board[121].tile = new Tile(-1, "s");
+        this.board[142].tile = new Tile(-1, "a");
+        this.board[150].tile = new Tile(-1, "b");
+        this.board[203].tile = new Tile(-1, "p");
     }
     setupTiles() {
         this.tiles = new Map();
