@@ -10,6 +10,7 @@ mixin testBoard(game)
                     .board-space(id=space.id)
                         if space.tile
                             +tile(space.tile.id, space.tile.letter, tiles.get(space.tile.letter).points, "false")
+            button#end-turn(onclick=`validateMove()`) End Turn
         .wrapper.hand-wrapper
             .hand
                 while h < 7

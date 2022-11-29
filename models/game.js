@@ -49,9 +49,13 @@ class Game {
 
     setupBoard() {
         this.board = [];
-        for (let i = 0; i < 255; i++) {
+        for (let i = 0; i < 225; i++) {
             this.board[i] = new Space(i);
         }
+        this.board[185].tile = new Tile(-1, "s");
+        this.board[200].tile = new Tile(-1, "a");
+        this.board[205].tile = new Tile(-1, "b");
+        this.board[170].tile = new Tile(-1, "p");
     }
     setupTiles() {
         this.tiles = new Map();
@@ -140,7 +144,7 @@ class Game {
         this.shuffleBag();
     }
     validateMove() {
-        
+        console.log("validateMove");
     }
     updateBoard() {
 
