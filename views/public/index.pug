@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+  if username 
+    h2 Welcome #{username}
+  p Welcome to #{title} (#{sessionID})
+  ul
+    li
+      a(href="/auth/register") Register
+    li 
+      a(href="/auth/login") Login
+    li 
+      a(href="/lobby") Lobby
+    li 
+      a(href="/game") Game  

@@ -1,5 +1,4 @@
 const express = require("express");
-var crypto = require('crypto');
 const router = express.Router();
 const db = require('../db');
 const { QueryTypes } = require("sequelize");
@@ -29,18 +28,13 @@ const { QueryTypes } = require("sequelize");
 //           allowNull: false
 //         }
 //       }
-router.get("/", (request, response) => {
-    var salt = crypto.randomBytes(16);
-    var sql = 'INSERT INTO users (username, "hashedpassword", "salt", "email") VALUES ($1, $2, $3, $4)'
-    var testuser =  'jontseg'
-    var testpassword = crypto.pbkdf2Sync('letmein', salt, 310000, 32, 'sha256')
-    var testemail = 'jontseg@gmail.com'
+router.get("/", (_req, res) => {
  
         db.any('SELECT * FROM users')
-        .then(results => response.json(results))
+        .then(results => res.json(results))
         .catch(error => {
             console.log(error)
-            response.json({ error })
+            res.json({ error })
         })
     // db.any('INSERT INTO users (username, hashedpassword, salt, email) VALUES ($1, $2, $3, $4)',[testuser, testpassword, salt, testemail]).then(_ => db.any('SELECT * FROM user'))
     //     .then(results => response.json(results))
@@ -52,24 +46,6 @@ router.get("/", (request, response) => {
 
 
 
-// router.get("/", (request, response) => {
-//     db.any('INSERT INTO  ("testString") VALUES ('Hello at $
-//          {Date.now()}')')
-//         .then(_ => db.any('SELECT * FROM table'))
-//         .then(results => response.json(results))
-//         .catch(error => {
-//             console.log(error)
-//             response.json({ error })
-//         })
-// });
 
 
-// router.get("/", (request, response) => {
-//     db.any('SELECT * FROM users')
-//         .then(results => response.json(results))
-//         .catch(error => {
-//             console.log(error)
-//             response.json({ error })
-//         })
-// });
 module.exports = router;

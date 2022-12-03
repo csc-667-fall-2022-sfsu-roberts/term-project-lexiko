@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  h1= Lobby
+  if username 
+    h2 Welcome #{username} (#{userID})
+  li 
+      a(href="/") Homepage
+
+  
+  template#message
+    span.sender
+    span.content
+    span.timestamp
+
+  #chat
+    #messages
+    #send
+      input(type="text" id="message-field")
+
+block footer
+  script(src="/socket.io/socket.io.js")
+  script(src="/javascripts/chat.js")
+  

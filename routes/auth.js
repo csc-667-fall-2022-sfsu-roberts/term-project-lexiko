@@ -1,60 +1,51 @@
-var express = require('express');
-var passport = require('passport');
-var LocalStrategy = require('passport-local');
-var crypto = require('crypto');
-var db = require('../db');
-var router = express.Router()
+const express = require("express");
+const Users = require("../db/users");
+
+const router = express.Router();
+
+
+router.get('/login', (req, res) => {
+    res.render('public/login');
+
+});
+
+router.get('/register', (req, res) => {
+    res.render('public/register', { title: 'Register' });
+});
+
+const handleLogin =
+  (req, res) =>
+  ({ id, username }) => {
+    req.session.authenticated = true;
+    req.session.userId = id;
+    req.session.username = username;
+
+    res.redirect("/lobby");
+  };
+
+const handleLoginError = (res, redirectUri) => 
+    (error) => {
+        console.log({ error });
+        res.redirect(redirectUri);
+    };
 
 
 
-passport.use(new LocalStrategy(function verify(username, password, cb) {
-    db.get('SELECT * FROM users WHERE username = ?', [ username ], function(err, row) {
-      if (err) { return cb(err); }
-      if (!row) { return cb(null, false, { message: 'Incorrect username or password.' }); }
+router.post("/login", (req, res) => {
+    const { username, password } = req.body;
   
-      crypto.pbkdf2(password, row.salt, 310000, 32, 'sha256', function(err, hashedPassword) {
-        if (err) { return cb(err); }
-        if (!crypto.timingSafeEqual(row.hashed_password, hashedPassword)) {
-          return cb(null, false, { message: 'Incorrect username or password.' });
-        }
-        return cb(null, row);
-      });
-    });
-}));
+    Users.login({ username, password })
+      .then(handleLogin(req, res))
+      .catch(handleLoginError(res, "/auth/login"));
+  });
 
-passport.serializeUser(function(user, cb) {
-    process.nextTick(function() {
-        cb(null, { id: user.id, username: user.username });
-    });
+
+router.post('/register', (req, res) => {
+    const {username, password, email} = req.body;
+    Users.register({username, password, email})
+        .then(handleLogin(req,res))
+        .catch(handleLoginError(res, "/auth/register"))
 });
-
-passport.deserializeUser(function(user, cb) {
-    process.nextTick(function() {
-        return cb(null, user);
-    });
-});
-
-router.get('/login', function(req, res, next) {
-    res.render('login');
-});
-
-router.post('/login/password', passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login'
-}));
-
-// old way to check if username is in db
-// router.post('/', function(request, response) {
-// var username = request.body.username
-// console.log(username)
-// db.query(`SELECT * FROM users where username = '?'`,username)
-// .then(results => response.json(results))
-// .catch(error => {
-//     console.log(error)
-//     response.json({ error })
-// })
-
-// });
 
 
 module.exports = router;
