@@ -75,10 +75,32 @@ function calculateScore() {
 
 */
 
+async function fetchAsync(url) {
+    let response = await fetch(url);
+    let data = await response.json();
+    return data;
+}
+
+function isValidWord(word) {
+    let dictAPI = "https://api.dictionaryapi.dev/api/v2/entries/en/";
+
+    fetchAsync(dictAPI + word)
+    .then(data => {
+        console.log("IS VALID: "+data);
+        if('title' in data) {
+            return false;
+        }
+        //return true if there ARE definitions
+        console.log("TRUE");
+        return true;
+    });
+}
+
 /*
 Get all .tiles under .board-space
 Return false if not in a row
 Return false if not connected
+Return false if not connected to an existing word
 Return false if not a word
 */
 function validateMove() {
@@ -130,7 +152,7 @@ function validateMove() {
     //if xvalid get row, if yvalid get column
     var activeRow = [...document.querySelectorAll(".board-space")];
 
-    if(xvalid) {
+    if (xvalid) {
         const row = basex * 15;
 
         activeRow = activeRow.filter(space => {
@@ -181,9 +203,129 @@ function validateMove() {
 
     //get word
     console.log(word);
-    //check if word is valid
-    //TODO read dictionary into set
+    //check if all words are valid
+    //validate word
 
+    if(!isValidWord(word)) return false;
+
+    console.log("Passed");
+    // //check perpendicular words
+    // activeRow = [...document.querySelectorAll(".board-space")];
+    // if (xvalid) {
+    //     //check each column
+    //     loop1:
+    //     for (let i = 0; i < 15; i++) {
+    //         const row = i * 15;
+
+    //         activeRow = activeRow.filter(space => {
+    //             return parseInt(space.id) % 15 == row;
+    //         }).sort((a, b) => {
+    //             return parseInt(a.id) - parseInt(b.id);
+    //         });
+    //         //validate words with new tiles
+    //         //iterate through each space
+    //         var wordStart = -1;
+    //         var newWordStart = -1;
+    //         var newWordEnd = -1;
+    //         var word = "";
+    //         loop2:
+    //         for (const space of activeRow) {
+    //             console.log((space.firstChild ? space.firstChild.firstChild.innerHTML : "."));
+    //             //while no tiles
+    //             //if tile, start word
+    //             if (wordStart < 0 && space.firstChild) {
+    //                 wordStart = space.id;
+    //                 if (space.firstChild.getAttribute("draggable") == "true") {
+    //                     newWordStart = wordStart;
+    //                 }
+    //             }
+    //             //while tiles
+    //             //if new tile, set word to new word
+    //             //find end of word
+    //             //if no tile
+    //             //if new word, validate new word
+    //             //else, reset word
+    //             if (wordStart >= 0 && newWordEnd < 0) { //while word but not new word
+    //                 if (!space.firstChild) {                                            //no tile
+    //                     wordStart = -1;
+    //                     if (newWordStart >= 0) {        //is new word
+    //                         newWordEnd = space.id - 1;
+    //                         //TODO validate word
+    //                         //if word, break loop2
+    //                         //else return false;
+    //                         console.log("WORD: " + word);
+    //                         if(validWords)
+
+    //                         break loop2;
+    //                     }
+    //                 } else if (space.firstChild.getAttribute("draggable") == "true") {  //new tile
+    //                     //set new word
+    //                     newWordStart = wordStart;
+    //                     word += space.firstChild.firstChild.innerHTML;
+    //                 } else {                                                            //regular tile
+    //                     word += space.firstChild.firstChild.innerHTML;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // } else {
+    //     //check each row
+    //     loop1:
+    //     for (let i = 0; i < 15; i++) {
+    //         const row = i * 15;
+
+    //         activeRow = activeRow.filter(space => {
+    //             return parseInt(space.id) >= row && parseInt(space.id) < row + 15;
+    //         }).sort((a, b) => {
+    //             return parseInt(a.id) - parseInt(b.id);
+    //         });
+    //         //validate words with new tiles
+    //         //iterate through each space
+    //         var wordStart = -1;
+    //         var newWordStart = -1;
+    //         var newWordEnd = -1;
+    //         var word = "";
+    //         loop2:
+    //         for (const space of activeRow) {
+    //             console.log((space.firstChild ? space.firstChild.firstChild.innerHTML : "."));
+    //             //while no tiles
+    //             //if tile, start word
+    //             if (wordStart < 0 && space.firstChild) {
+    //                 wordStart = space.id;
+    //                 if (space.firstChild.getAttribute("draggable") == "true") {
+    //                     newWordStart = wordStart;
+    //                 }
+    //             }
+    //             //while tiles
+    //             //if new tile, set word to new word
+    //             //find end of word
+    //             //if no tile
+    //             //if new word, validate new word
+    //             //else, reset word
+    //             if (wordStart >= 0 && newWordEnd < 0) { //while word but not new word
+    //                 if (!space.firstChild) {                                            //no tile
+    //                     wordStart = -1;
+    //                     if (newWordStart >= 0) {        //is new word
+    //                         newWordEnd = space.id - 1;
+    //                         //TODO validate word
+    //                         //if word, break loop2
+    //                         //else return false;
+    //                         console.log("WORD: " + word);
+
+    //                         break loop2;
+    //                     }
+    //                 } else if (space.firstChild.getAttribute("draggable") == "true") {  //new tile
+    //                     //set new word
+    //                     newWordStart = wordStart;
+    //                     word += space.firstChild.firstChild.innerHTML;
+    //                 } else {                                                            //regular tile
+    //                     word += space.firstChild.firstChild.innerHTML;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+    return true;
 }
 
 const localBoard = new Board();
