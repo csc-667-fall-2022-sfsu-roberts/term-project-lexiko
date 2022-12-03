@@ -7,11 +7,11 @@ router.get("/:id", (req, res) => {
   res.render("protected/game", { id });
 });
 
-// router.get("/:id/:message", (req, res) => {
-//   const { id, message } = req.params;
+router.get("/:id/:message", (req, res) => {
+  const { id, message } = req.params;
 
-//   res.render("protected/game", { id, message });
-// });
+  res.render("protected/game", { id, message });
+});
 
 function getRandom(arr, n) {
   var result = new Array(n),
@@ -58,7 +58,7 @@ var rawTileList = [
 var fullTileList = new Array();
 
 let tileId = 0;
-for(const tileData of rawTileList) {
+for(const tileData of (rawTileList)) {
   for(let multiples = 0; multiples < tileData["tiles"]; multiples++) {
     fullTileList[tileId] = [tileData["letter"], tileData["points"], tileId];
     tileId++;
@@ -79,7 +79,7 @@ router.get('/', function(req, res, next) {
     playerScores: [["person", 54], ["player", 40], ["guy", 30]]
   }
 
-  res.render('protected/game', someData);
+  res.render("protected/game", someData);
   });
 
 module.exports = router;
