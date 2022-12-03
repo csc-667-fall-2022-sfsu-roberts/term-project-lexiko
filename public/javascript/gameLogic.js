@@ -81,17 +81,17 @@ async function fetchAsync(url) {
     return data;
 }
 
-function isValidWord(word) {
+async function isValidWord(word) {
     let dictAPI = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
     fetchAsync(dictAPI + word)
     .then(data => {
-        console.log("IS VALID: "+data);
         if('title' in data) {
+            console.log(word+" is not a word");
             return false;
         }
         //return true if there ARE definitions
-        console.log("TRUE");
+        console.log(word+" is a word");
         return true;
     });
 }
@@ -103,8 +103,8 @@ Return false if not connected
 Return false if not connected to an existing word
 Return false if not a word
 */
-function validateMove() {
-
+async function validateMove() {
+    
     //get all placed tiles
     var tiles = [...document.querySelectorAll(".tile")];
     tiles = tiles.filter(tile => {
@@ -177,6 +177,7 @@ function validateMove() {
     for (const space of activeRow) {
         console.log((space.firstChild ? space.firstChild.firstChild.innerHTML : "."));
         if (wordStart < 0 && space.firstChild) {                     //start of a word
+            console.log("START WORD new word end: "+newWordEnd);
             wordStart = space.id;
             if (space.firstChild.getAttribute("draggable") == "true") {        //start of a valid word
                 newWordStart = wordStart;
@@ -184,9 +185,12 @@ function validateMove() {
         }
         if (wordStart >= 0 && newWordEnd < 0) {                      //ongoing word
             if (!space.firstChild) {                                 //set end of valid word
+                console.log("RESET WORD; newWordEnd: "+newWordEnd);
                 wordStart = -1;
                 if (newWordStart >= 0) {
                     newWordEnd = space.id - 1;
+                } else if(newWordEnd < 0) {
+                    word = "";
                 }
             } else if (space.firstChild.getAttribute("draggable") == "true") { //set word to valid word
                 newWordStart = wordStart;
@@ -206,125 +210,155 @@ function validateMove() {
     //check if all words are valid
     //validate word
 
-    if(!isValidWord(word)) return false;
+    const validWord = isValidWord(word);
+    if(await validWord) return false;
 
-    console.log("Passed");
-    // //check perpendicular words
-    // activeRow = [...document.querySelectorAll(".board-space")];
-    // if (xvalid) {
-    //     //check each column
-    //     loop1:
-    //     for (let i = 0; i < 15; i++) {
-    //         const row = i * 15;
+    var allWords = [];
+    allWords[0] = {
+        "word": word,
+        "start": newWordStart,
+        "end": newWordEnd
+    };
 
-    //         activeRow = activeRow.filter(space => {
-    //             return parseInt(space.id) % 15 == row;
-    //         }).sort((a, b) => {
-    //             return parseInt(a.id) - parseInt(b.id);
-    //         });
-    //         //validate words with new tiles
-    //         //iterate through each space
-    //         var wordStart = -1;
-    //         var newWordStart = -1;
-    //         var newWordEnd = -1;
-    //         var word = "";
-    //         loop2:
-    //         for (const space of activeRow) {
-    //             console.log((space.firstChild ? space.firstChild.firstChild.innerHTML : "."));
-    //             //while no tiles
-    //             //if tile, start word
-    //             if (wordStart < 0 && space.firstChild) {
-    //                 wordStart = space.id;
-    //                 if (space.firstChild.getAttribute("draggable") == "true") {
-    //                     newWordStart = wordStart;
-    //                 }
-    //             }
-    //             //while tiles
-    //             //if new tile, set word to new word
-    //             //find end of word
-    //             //if no tile
-    //             //if new word, validate new word
-    //             //else, reset word
-    //             if (wordStart >= 0 && newWordEnd < 0) { //while word but not new word
-    //                 if (!space.firstChild) {                                            //no tile
-    //                     wordStart = -1;
-    //                     if (newWordStart >= 0) {        //is new word
-    //                         newWordEnd = space.id - 1;
-    //                         //TODO validate word
-    //                         //if word, break loop2
-    //                         //else return false;
-    //                         console.log("WORD: " + word);
-    //                         if(validWords)
+    //check perpendicular words
+    if (xvalid) {
+        console.log("COLUMNS");
+        //check each column
+        loop1:
+        for (let i = 0; i < 15; i++) {
+            const row = i;
+            console.log("row: "+row);
 
-    //                         break loop2;
-    //                     }
-    //                 } else if (space.firstChild.getAttribute("draggable") == "true") {  //new tile
-    //                     //set new word
-    //                     newWordStart = wordStart;
-    //                     word += space.firstChild.firstChild.innerHTML;
-    //                 } else {                                                            //regular tile
-    //                     word += space.firstChild.firstChild.innerHTML;
-    //                 }
-    //             }
-    //         }
-    //     }
-    // } else {
-    //     //check each row
-    //     loop1:
-    //     for (let i = 0; i < 15; i++) {
-    //         const row = i * 15;
+            activeRow = [...document.querySelectorAll(".board-space")];
+            activeRow = activeRow.filter(space => {
+                return parseInt(space.id) % 15 == row;
+            }).sort((a, b) => {
+                return parseInt(a.id) - parseInt(b.id);
+            });
+            //validate words with new tiles
+            //iterate through each space
+            var wordStart = -1;
+            var newWordStart = -1;
+            var newWordEnd = -1;
+            var word = "";
+            loop2:
+            for (const space of activeRow) {
+                console.log((space.firstChild ? space.firstChild.firstChild.innerHTML : "."));
+                //while no tiles
+                //if tile, start word
+                if (wordStart < 0 && space.firstChild) {
+                    wordStart = space.id;
+                    if (space.firstChild.getAttribute("draggable") == "true") {
+                        newWordStart = wordStart;
+                    }
+                }
+                //while tiles
+                //if new tile, set word to new word
+                //find end of word
+                //if no tile
+                //if new word, validate new word
+                //else, reset word
+                if (wordStart >= 0 && newWordEnd < 0) { //while word but not new word
+                    if (!space.firstChild) {                                            //no tile
+                        wordStart = -1;
+                        if (newWordStart >= 0) {        //is new word
+                            newWordEnd = space.id - 1;
+                            //TODO validate word
+                            //if word, break loop2
+                            //else return false;
+                            console.log("WORD: " + word);
+                            if(word.length <= 1) break loop2;
+                            allWords.push({
+                                "word": word,
+                                "start": newWordStart,
+                                "end": newWordEnd
+                            });
+                        } else if(newWordEnd < 0) {
+                            word = "";
+                        }
+                    } else if (space.firstChild.getAttribute("draggable") == "true") {  //new tile
+                        //set new word
+                        newWordStart = wordStart;
+                        word += space.firstChild.firstChild.innerHTML;
+                    } else {                                                            //regular tile
+                        word += space.firstChild.firstChild.innerHTML;
+                    }
+                }
+            }
+        }
+    } else {
+        console.log("ROWS");
+        //check each row
+        loop1:
+        for (let i = 0; i < 15; i++) {
+            const row = i * 15;
 
-    //         activeRow = activeRow.filter(space => {
-    //             return parseInt(space.id) >= row && parseInt(space.id) < row + 15;
-    //         }).sort((a, b) => {
-    //             return parseInt(a.id) - parseInt(b.id);
-    //         });
-    //         //validate words with new tiles
-    //         //iterate through each space
-    //         var wordStart = -1;
-    //         var newWordStart = -1;
-    //         var newWordEnd = -1;
-    //         var word = "";
-    //         loop2:
-    //         for (const space of activeRow) {
-    //             console.log((space.firstChild ? space.firstChild.firstChild.innerHTML : "."));
-    //             //while no tiles
-    //             //if tile, start word
-    //             if (wordStart < 0 && space.firstChild) {
-    //                 wordStart = space.id;
-    //                 if (space.firstChild.getAttribute("draggable") == "true") {
-    //                     newWordStart = wordStart;
-    //                 }
-    //             }
-    //             //while tiles
-    //             //if new tile, set word to new word
-    //             //find end of word
-    //             //if no tile
-    //             //if new word, validate new word
-    //             //else, reset word
-    //             if (wordStart >= 0 && newWordEnd < 0) { //while word but not new word
-    //                 if (!space.firstChild) {                                            //no tile
-    //                     wordStart = -1;
-    //                     if (newWordStart >= 0) {        //is new word
-    //                         newWordEnd = space.id - 1;
-    //                         //TODO validate word
-    //                         //if word, break loop2
-    //                         //else return false;
-    //                         console.log("WORD: " + word);
+            activeRow = [...document.querySelectorAll(".board-space")];
+            activeRow = activeRow.filter(space => {
+                return parseInt(space.id) >= row && parseInt(space.id) < row + 15;
+            }).sort((a, b) => {
+                return parseInt(a.id) - parseInt(b.id);
+            });
+            //validate words with new tiles
+            //iterate through each space
+            var wordStart = -1;
+            var newWordStart = -1;
+            var newWordEnd = -1;
+            var word = "";
+            loop2:
+            for (const space of activeRow) {
+                console.log((space.firstChild ? space.firstChild.firstChild.innerHTML : "."));
+                //while no tiles
+                //if tile, start word
+                if (wordStart < 0 && space.firstChild) {
+                    wordStart = space.id;
+                    if (space.firstChild.getAttribute("draggable") == "true") {
+                        newWordStart = wordStart;
+                    }
+                }
+                //while tiles
+                //if new tile, set word to new word
+                //find end of word
+                //if no tile
+                //if new word, validate new word
+                //else, reset word
+                if (wordStart >= 0 && newWordEnd < 0) { //while word but not new word
+                    if (!space.firstChild) {                                            //no tile
+                        wordStart = -1;
+                        if (newWordStart >= 0) {        //is new word
+                            newWordEnd = space.id - 1;
+                            //TODO validate word
+                            //if word, break loop2
+                            //else return false;
+                            console.log("WORD: " + word);
+                            if(word.length <= 1) break loop2;
+                            allWords.push({
+                                "word": word,
+                                "start": newWordStart,
+                                "end": newWordEnd
+                            });
+                        } else if(newWordEnd < 0) {
+                            word = "";
+                        }
+                    } else if (space.firstChild.getAttribute("draggable") == "true") {  //new tile
+                        //set new word
+                        newWordStart = wordStart;
+                        word += space.firstChild.firstChild.innerHTML;
+                    } else {                                                            //regular tile
+                        word += space.firstChild.firstChild.innerHTML;
+                    }
+                }
+            }
+        }
+    }
 
-    //                         break loop2;
-    //                     }
-    //                 } else if (space.firstChild.getAttribute("draggable") == "true") {  //new tile
-    //                     //set new word
-    //                     newWordStart = wordStart;
-    //                     word += space.firstChild.firstChild.innerHTML;
-    //                 } else {                                                            //regular tile
-    //                     word += space.firstChild.firstChild.innerHTML;
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
+    for(const word of allWords) {
+        console.log("valid word: "+word.word);
+        const validWord = isValidWord(word.word);
+        if(await validWord) return false;
+    }
+
+    console.log("PASSED");
     return true;
 }
 
