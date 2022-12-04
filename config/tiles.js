@@ -1,0 +1,31 @@
+const rawTileList = [
+    { "letter": "a", "points":  1, "count":  9 },
+    { "letter": "b", "points":  3, "count":  2 },
+    { "letter": "c", "points":  3, "count":  2 },
+    { "letter": "d", "points":  2, "count":  4 },
+    { "letter": "e", "points":  1, "count": 12 },
+    { "letter": "f", "points":  4, "count":  2 },
+    { "letter": "g", "points":  2, "count":  3 },
+    { "letter": "h", "points":  4, "count":  2 },
+    { "letter": "i", "points":  1, "count":  9 },
+    { "letter": "j", "points":  8, "count":  1 },
+    { "letter": "k", "points":  5, "count":  1 },
+    { "letter": "l", "points":  1, "count":  4 },
+    { "letter": "m", "points":  3, "count":  2 },
+    { "letter": "n", "points":  1, "count":  6 },
+    { "letter": "o", "points":  1, "count":  8 },
+    { "letter": "p", "points":  3, "count":  2 },
+    { "letter": "q", "points": 10, "count":  1 },
+    { "letter": "r", "points":  1, "count":  6 },
+    { "letter": "s", "points":  1, "count":  4 },
+    { "letter": "t", "points":  1, "count":  6 },
+    { "letter": "u", "points":  1, "count":  4 },
+    { "letter": "v", "points":  4, "count":  2 },
+    { "letter": "w", "points":  4, "count":  2 },
+    { "letter": "x", "points":  8, "count":  1 },
+    { "letter": "y", "points":  4, "count":  2 },
+    { "letter": "z", "points": 10, "count":  1 },
+    //" ": { "count": 2}
+]
+
+module.exports = { rawTileList }
