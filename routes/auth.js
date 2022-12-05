@@ -20,6 +20,7 @@ const handleLogin =
     req.session.userId = id;
     req.session.username = username;
 
+    console.log(req.session);
     res.redirect("/lobby");
   };
 

@@ -9,6 +9,9 @@ block content
 
   #games-list
     ul
+      each game in games
+        li
+          a(href=`/game/${game.id}` target="_blank")= game.title
     form(action="/api/games/create" method="post")
       label(for="title") Title (optional):
       input#title(type="text" name="title")

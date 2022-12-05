@@ -19,14 +19,24 @@
 
 
 var express = require('express');
+const Games = require("../db/game");
 var router = express.Router()
 
 
 router.get('/', (req, res) => {
     const {sessionID} = req;
     const {username, userID} = req.session;
-    res.render('protected/lobby', {username, userID});
 
+    Games.all()
+    .then((games) => {
+        console.log({games});
+        res.render('protected/lobby', {username, userID, games});
+    }).catch((error) => {
+        console.log(error);
+        res.redirect("error");
+    });
+
+    // res.render('protected/lobby', {username, userID});
 });
 
 

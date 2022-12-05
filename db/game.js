@@ -17,6 +17,9 @@ const addUser = (user_id, game_id) => {
 }
 
 const all = () => {
-    return db.any(LIST_SQL);
+    return db.any(LIST_SQL).then(games => {
+        // console.log("Fetched games", { games});
+        return games;
+    });
 }
 module.exports = {create, all};
