@@ -2,6 +2,8 @@ const db = require("./index");
 
 const CREATE_SQL = "INSERT INTO games (title) VALUES (${title}) RETURNING id"
 
+const CHECK_USER_IN_GAME_SQL = "SELECT * FROM game_users WHERE user_id=${user_id}";
+
 const ADD_USER_SQL = "INSERT INTO game_users (game_id, user_id) VALUES (${game_id}, ${user_id}) RETURNING game_id"
 
 const LIST_SQL = "SELECT * FROM games";
@@ -12,7 +14,12 @@ const create = (user_id, title = "") => {
 } 
 
 const addUser = (user_id, game_id) => {
-    return db.one(ADD_USER_SQL, {user_id, game_id});
+    return db
+    .none(CHECK_USER_IN_GAME_SQL, { user_id })
+    .then(() => db.one(ADD_USER_SQL, { user_id, game_id }));
+    // when you click on join game, you will hang (error), you may want to do something to
+    // manage that exception
+    // this piece of coded added in lecture (11/28 section 01 @ hour 1:45ish)
 
 }
 
@@ -22,4 +29,4 @@ const all = () => {
         return games;
     });
 }
-module.exports = {create, all};
+module.exports = {create, all, addUser};

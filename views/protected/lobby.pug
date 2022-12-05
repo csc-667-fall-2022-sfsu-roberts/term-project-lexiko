@@ -11,11 +11,15 @@ block content
     ul
       each game in games
         li
-          a(href=`/game/${game.id}` target="_blank")= game.title
+        span= game.title
+          form(action=`/api/games/${game.id}/join` method="post")
+            button Join game
+
     form(action="/api/games/create" method="post")
       label(for="title") Title (optional):
       input#title(type="text" name="title")
       button#create-game.btn.grad-2 Create a new game
+
   template#message
     span.sender
     span.content
