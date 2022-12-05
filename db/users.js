@@ -6,7 +6,6 @@ const REGISTER_USER = "INSERT INTO users (username, password, email) VALUES (${u
 const LOGIN_USER = "SELECT id, username, password FROM users WHERE username=${username}";
 
 const register = ({username, password, email}) => {
-  console.log(username, password, email);
    return db
    .none(LOOKUP_USER_BY_USERNAME, {username})
    .then(() => bcrypt.hash(password, 10))
