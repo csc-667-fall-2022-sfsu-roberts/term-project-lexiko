@@ -12,7 +12,7 @@ mixin board(gameBoardTiles, handTiles)
                         .board-tile
         .wrapper.hand-wrapper
             .hand
-                each tileVal in handTiles
+                each tileVal in handTiles ? handTiles : [] 
                     .hand-space(id = t++)
                         .hand-tile
                             +tile(tileVal[0], tileVal[1], tileVal[2])
