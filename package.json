@@ -17,6 +17,7 @@
     "connect-pg-simple": "^7.0.0",
     "connect-sqlite3": "^0.9.13",
     "cookie-parser": "~1.4.4",
+    "cookie-session": "^2.0.0",
     "crypto": "^1.0.1",
     "debug": "~2.6.9",
     "dotenv": "^16.0.3",

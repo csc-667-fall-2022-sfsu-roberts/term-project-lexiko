@@ -1,4 +1,4 @@
-const session = require("express-session");
+const session = require("cookie-session");
 
 const sessionInstance = session({
     secret: "secret",
