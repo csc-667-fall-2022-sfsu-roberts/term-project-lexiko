@@ -1,10 +1,31 @@
-mixin chat(msg)
+//- mixin chat()
+//-     link(rel='stylesheet', href='/stylesheets/style.css')
+
+//-     template#message
+//-       span.sender
+//-       span.content
+//-       span.timestamp
+
+//-     #chat
+//-     #messages
+//-     #send
+//-         input(type="text" id="message-field")
+  
+//-     script(src="/socket.io/socket.io.js")
+
+
+mixin chat()
     link(rel='stylesheet', href='/stylesheets/style.css')
-    div
-        #main-content
-        ul#messages
-        form#form(action='')
-            input#input(autocomplete='off')
-            button Send
-            button#endturn End Turn
-    script(src='javascripts/client-dist/socket.io.js')
+
+    template#message
+      li
+        span.sender
+        span.content
+        span.timestamp
+
+    #chat
+    ul#messages
+    #send
+        input(type="text" id="message-field")
+  
+    script(src="/socket.io/socket.io.js")

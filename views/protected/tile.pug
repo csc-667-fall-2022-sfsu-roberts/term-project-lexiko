@@ -1,4 +1,4 @@
-mixin tile(letter, points, id)
-    .tile(id=id, draggable="true")
+mixin tile(id,letter, points, movable)
+    .tile(id=id, draggable=movable)
         .tile-letter= letter
         .tile-points= points

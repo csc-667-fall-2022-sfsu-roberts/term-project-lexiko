@@ -20,7 +20,7 @@
     "crypto": "^1.0.1",
     "debug": "~2.6.9",
     "dotenv": "^16.0.3",
-    "express": "~4.16.1",
+    "express": "^4.18.2",
     "express-flash": "^0.0.2",
     "express-session": "^1.17.3",
     "flash": "^1.1.0",

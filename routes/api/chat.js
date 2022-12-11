@@ -5,7 +5,9 @@ router.post("/:id", (request, response) => {
   const { id } = request.params;
   const { message } = request.body;
   const { username } = request.session;
-  const timestamp = Date.now();
+  // const timestamp = Date.now();
+  var date = new Date();
+	const timestamp = (date.getHours() % 12) +":"+date.getMinutes()+":"+ date.getSeconds();
 
   request.app.io.emit(`chat:${id}`, {
     sender: username,

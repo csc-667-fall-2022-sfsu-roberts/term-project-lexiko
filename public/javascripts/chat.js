@@ -4,6 +4,7 @@ document
   .querySelector("#message-field")
   .addEventListener("keydown", (event) => {
     if (event.keyCode === 13) {
+      console.log(document.querySelector("#message-field").value)
       fetch("/chat/0", {
         method: "post",
         headers: { "Content-Type": "application/json" },
@@ -22,7 +23,7 @@ socket.on("chat:0", ({ sender, message, timestamp }) => {
   const template = document.querySelector("#message");
 
   const content = template.content.cloneNode(true);
-  content.querySelector(".sender").innerText = sender;
+  content.querySelector(".sender").innerText = sender + ": ";
   content.querySelector(".content").innerText = message;
   content.querySelector(".timestamp").innerText = timestamp;
 

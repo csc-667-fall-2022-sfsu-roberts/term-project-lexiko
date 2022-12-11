@@ -10,12 +10,13 @@ block content
             .game-id.row-flex
                 gameName
                 gameId
-            +board(gameBoardTiles, handTiles)
+            +board(this)
+            //- +board(gameBoardTiles, handTiles)
         .game-lobby-right
             .wrapper
-                +leaderboard(playerScores)
-            //- .wrapper
-                +chat("oh hi")
-    script(src="/javascript/gameLogic.js")
-    script(src="/javascript/dragDropHandler.js")
-    //- script(src="/javascript/api/chat.js")
+                +leaderboard(players)
+            .wrapper
+                +chat()
+    script(src="/javascripts/gameLogic.js")
+    script(src="/javascripts/dragDropHandler.js")
+    script(src="/javascripts/chat.js")
