@@ -8,10 +8,12 @@ const ADD_USER_SQL = "INSERT INTO game_users (game_id, user_id) VALUES (${game_i
 
 const LIST_SQL = "SELECT * FROM games";
 
-const ACTIVE_GAMES = "SELECT * FROM games, game_users, WHERE games.id = games.game_id AND WHERE game_users = ${user_id}"
+const ACTIVE_GAMES = 
+"SELECT id, title FROM games LEFT JOIN game_users ON games.id = game_users.game_id WHERE game_users.user_id=${user_id}";
 
 const JOINABLE_GAMES = "SELECT * FROM games WHERE id NOT IN (" +
-    "SELECT * FROM games LEFT JOIN game_users ON games.id = game_users.game_id WHERE game_users.user_id=${user_id})";
+    "SELECT id FROM games LEFT JOIN game_users ON games.id = game_users.game_id WHERE game_users.user_id=${user_id}" +
+    ")";
 
 const create = (user_id, title = "") => {
     return db.one(CREATE_SQL, {title})
@@ -28,13 +30,11 @@ const addUser = (user_id, game_id) => {
 
 }
 
-const active = (user_id) => {
-    db.any(ACTIVE_GAMES, { user_id });
-}
+const active = (user_id) =>  db.any(ACTIVE_GAMES, { user_id });
 
-const joinable = (user_id) => {
-    db.any(JOINABLE_GAMES, { user_id })
-}
+
+const joinable = (user_id) => db.any(JOINABLE_GAMES, { user_id })
+
 
 const all = (user_id) => 
     Promise.all([active(user_id),

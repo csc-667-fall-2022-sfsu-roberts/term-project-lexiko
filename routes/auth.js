@@ -18,11 +18,13 @@ const handleLogin =
   (req, res) =>
   ({ id, username }) => {
     req.session.authenticated = true;
-    req.session.userId = id;
+    req.session.userID = id;
     req.session.username = username;
 
     console.log(req.session);
-    res.redirect("/lobby");
+    res.render("public/index");
+    // debugging
+    // res.redirect("/lobby");
   };
 
 const handleLoginError = (res, redirectUri) => 
@@ -44,6 +46,7 @@ router.post("/login", (req, res) => {
 
 router.post('/register', (req, res) => {
     const {username, password, email} = req.body;
+    console.log({username, password, email})
     Users.register({username, password, email})
         .then(handleLogin(req,res))
         .catch(handleLoginError(res, "/auth/register"))

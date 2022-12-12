@@ -24,14 +24,16 @@ var router = express.Router()
 
 
 router.get('/', (req, res) => {
-    const {sessionID} = req;
+    // const {sessionID} = req;
     const {username, userID} = req.session;
-
+    console.log("userID = " , userID)
+    // res.render('protected/lobby', {username, userID});
     Games.all(userID)
     .then((games) => {
+        console.log(games);
         res.render('protected/lobby', {username, userID, games});
     }).catch((error) => {
-        console.log(userID)
+        console.log(error);
         res.redirect("error");
     });
 

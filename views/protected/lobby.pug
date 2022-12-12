@@ -10,19 +10,19 @@ block content
   #games-list
     h3 Joinable Games
     ul
-      if games.joinable
+      if games
         each game in games.joinable
           li
           span= game.title
             form(action=`/api/games/${game.id}/join` method="post" target="_blank")
               button Join game
 
-    h3 Active Games
-    ul
-      if games.active
-        each game in games.active
-          li
-            a(href=`/games/${game.id}` target="_blank")= games.title
+    //- h3 Active Games
+    //- ul
+    //-   if games
+    //-     each game in games.active
+    //-       li
+    //-         a(href=`/games/${game.id}` target="_blank")= games.title
 
     form(action="/api/games/create" method="post")
       label(for="title") Title (optional):
