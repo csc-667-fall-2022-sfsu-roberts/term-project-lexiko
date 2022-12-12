@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const Games = require("../../db/game");
+const Games = require("../../db/games");
+
 
 router.post("/create", (request, response) => {
     const { userId } = request.session;

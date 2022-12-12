@@ -10,6 +10,7 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/register', (req, res) => {
+    console.log("in register get")
     res.render('public/register', { title: 'Register' });
 });
 
