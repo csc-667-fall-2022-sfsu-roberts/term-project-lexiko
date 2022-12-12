@@ -40,7 +40,6 @@ img[src = "../images/lexikologo.png"] {
 }
 
 .container {
-  max-width: 100rem;
   width: 100%;
   display: flex;
 	align-items: center;
