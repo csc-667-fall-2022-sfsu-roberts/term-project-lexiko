@@ -7,11 +7,12 @@ block content
     div(style="display: flex; flex-direction: row")
         div(style="max-width: 60rem;")
           .wrapper(style="margin: 0; max-width: 60rem; width: 40rem; align-items: normal;")
-            h1= Lobby
+            a(href="/" style="padding: 0")
+              img(src="../images/lexikologo.png", alt="", style="max-width: 15rem; height: auto; padding: 0")
+            //-h1= Lobby
             if username 
               h2 Welcome #{username} (#{userID})!
-            li 
-              a(href="/") Homepage
+    
             #games-list
               h3 Joinable Games
               ul#leaderboard(style="max-height: 20rem; overflow-y: scroll; overflow-x: hidden; width: 100%;")
