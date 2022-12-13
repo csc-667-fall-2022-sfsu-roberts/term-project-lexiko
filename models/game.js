@@ -77,10 +77,6 @@ class Game {
             }
             this.board[i] = new Space(i, multiplier, type);
         }
-        this.board[121].tile = new Tile(-1, "s");
-        this.board[142].tile = new Tile(-1, "a");
-        this.board[150].tile = new Tile(-1, "b");
-        this.board[203].tile = new Tile(-1, "p");
     }
     setupTiles() {
         this.tiles = new Map();
