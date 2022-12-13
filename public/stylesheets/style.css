@@ -32,7 +32,7 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background: #c2e9fb;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 img[src = "../images/lexikologo.png"] {
