@@ -370,8 +370,9 @@ async function validateMove() {
     //if the letter is on a letter multiplier, multiply
     //if the letter is on a word multiplier, add it to the word multiplier
     let score = 0;
-    let wordMultiplier = 1;
     for(const word of allWords) {
+        let wordScore = 0;
+        let wordMultiplier = 1;
         console.log("Valid words: "+JSON.stringify(word));
         if(word.end - word.start >= 15) { //vertically aligned
             console.log("vertically aligned");
@@ -392,26 +393,26 @@ async function validateMove() {
                 const points = space.firstChild.querySelector(".tile-points");
                 console.log("id: "+space.id+", points: "+parseInt(points.innerHTML));
                 if(space.firstChild.getAttribute("draggable") != "true") {
-                    score += parseInt(points.innerHTML);
+                    wordScore += parseInt(points.innerHTML);
                 } else if(space.classList.contains("tL")) {
                     console.log("LETTER MULT");
                     if(space.classList.contains("m2")) {
-                        score += parseInt(points.innerHTML)*2;
+                        wordScore += parseInt(points.innerHTML)*2;
                     } else if(space.classList.contains("m3")) {
-                        score += parseInt(points.innerHTML)*3;
+                        wordScore += parseInt(points.innerHTML)*3;
                     }
                 } else if(space.classList.contains("tW")) {
                     console.log("WORD MULT");
-                    score += parseInt(points.innerHTML);
+                    wordScore += parseInt(points.innerHTML);
                     if(space.classList.contains("m2")) {
                         wordMultiplier *= 2;
                     } else if(space.classList.contains("m3")) {
                         wordMultiplier *= 3;
                     }
                 } else {
-                    score += parseInt(points.innerHTML);
+                    wordScore += parseInt(points.innerHTML);
                 }
-                console.log("score = "+score);
+                console.log("score = "+wordScore);
             }
         } else {
             console.log("horizontally aligned");
@@ -430,31 +431,32 @@ async function validateMove() {
                 const points = space.firstChild.querySelector(".tile-points");
                 console.log("id: "+space.id+", points: "+parseInt(points.innerHTML));
                 if(space.firstChild.getAttribute("draggable") != "true") {
-                    score += parseInt(points.innerHTML);
+                    wordScore += parseInt(points.innerHTML);
                 } else if(space.classList.contains("tL")) {
                     console.log("LETTER MULT");
                     if(space.classList.contains("m2")) {
-                        score += parseInt(points.innerHTML)*2;
+                        wordScore += parseInt(points.innerHTML)*2;
                     } else if(space.classList.contains("m3")) {
-                        score += parseInt(points.innerHTML)*3;
+                        wordScore += parseInt(points.innerHTML)*3;
                     }
                 } else if(space.classList.contains("tW")) {
                     console.log("WORD MULT");
-                    score += parseInt(points.innerHTML);
+                    wordScore += parseInt(points.innerHTML);
                     if(space.classList.contains("m2")) {
                         wordMultiplier *= 2;
                     } else if(space.classList.contains("m3")) {
                         wordMultiplier *= 3;
                     }
                 } else {
-                    score += parseInt(points.innerHTML);
+                    wordScore += parseInt(points.innerHTML);
                 }
-                console.log("score = "+score);
+                console.log("score = "+wordScore);
             }
         }
+        wordScore *= wordMultiplier;
+        score += wordScore;
     }
 
-    score *= wordMultiplier;
     console.log("SCORE: "+score);
 
     console.log("PASSED");
