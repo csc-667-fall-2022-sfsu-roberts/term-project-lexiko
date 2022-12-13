@@ -229,6 +229,22 @@ ul {
   width: 40px;
 }
 
+.m2.tW {
+  background-color: #ffa8a8
+}
+
+.m3.tW {
+  background-color: #c65555
+}
+
+.m2.tL {
+  background-color: #a8a8ff
+}
+
+.m3.tL {
+  background-color: #5555c6
+}
+
 .board-space:hover {
   cursor: default;
 }

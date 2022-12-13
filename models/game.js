@@ -2,9 +2,11 @@
 
 class Space { //board space
 
-    constructor(id) {
+    constructor(id, multiplier, type) {
         this.id = id;
         this.tile = null;
+        this.multiplier = multiplier;
+        this.type = type;
     }
 
     hasTile() {
@@ -50,12 +52,35 @@ class Game {
     setupBoard() {
         this.board = [];
         for (let i = 0; i < 225; i++) {
-            this.board[i] = new Space(i);
+            let multiplier = 1;
+            let type = "none";
+            let x = Math.floor(i / 15);
+            let y = i % 15;
+            if(((x == 1 || x == 13) && (y == 1 || y == 13))
+                    || ((x == 2 || x == 12) && (y == 2 || y == 12))
+                    || ((x == 3 || x == 11) && (y == 3 || y == 11))
+                    || ((x == 4 || x == 10) && (y == 4 || y == 10))
+                    || (x == 7 && y == 7)) {
+                multiplier = 2;
+                type = "W";
+            } else if(((x == 3 || x == 11) && (y == 0 || y == 7 || y == 14))
+                    || ((x == 0 || x == 7 || x == 14) && (y == 3 || y == 11))
+                    || ((x == 2 || x == 6 || x == 8 || x == 12) && (y == 2 || y == 6 || y == 8 || y == 12))) {
+                multiplier = 2;
+                type = "L";
+            } else if((x == 1 || x == 5 || x == 9 || x == 13) && (y == 1 || y == 5 || y == 9 || y == 13)) {
+                multiplier = 3;
+                type = "L";
+            } else if((x == 0 || x == 7 || x == 14) && (y == 0 || y == 7 || y == 14)) {
+                multiplier = 3;
+                type = "W";
+            }
+            this.board[i] = new Space(i, multiplier, type);
         }
-        this.board[121].tile = new Tile(-1, "s");
-        this.board[142].tile = new Tile(-1, "a");
-        this.board[150].tile = new Tile(-1, "b");
-        this.board[203].tile = new Tile(-1, "p");
+        // this.board[121].tile = new Tile(-1, "s");
+        // this.board[142].tile = new Tile(-1, "a");
+        // this.board[150].tile = new Tile(-1, "b");
+        // this.board[203].tile = new Tile(-1, "p");
     }
     setupTiles() {
         this.tiles = new Map();
