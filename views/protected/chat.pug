@@ -24,8 +24,8 @@ mixin chat()
         span.timestamp
 
     #chat
-    ul#messages
-    #send
-        input(type="text" id="message-field")
+    ul#messages(style="height: 30em; max-height: 30em; overflow-y: scroll")
+    #send(class="input-field")
+        input(type="text" placeholder="Enter chat..." id="message-field")
   
     script(src="/socket.io/socket.io.js")

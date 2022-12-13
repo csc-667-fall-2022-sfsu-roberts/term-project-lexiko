@@ -1,49 +1,72 @@
 extends layout
 
+include chat
+
 block content
-  h1= Lobby
-  if username 
-    h2 Welcome #{username} (#{userID})
-  li 
-      a(href="/") Homepage
+  .container(style="margin-top: 20px;")
+    div(style="display: flex; flex-direction: row")
+        div(style="max-width: 60rem;")
+          .wrapper(style="margin: 0; max-width: 60rem; width: 40rem; align-items: normal;")
+            h1= Lobby
+            if username 
+              h2 Welcome #{username} (#{userID})!
+            li 
+              a(href="/") Homepage
+            #games-list
+              h3 Joinable Games
+              ul#leaderboard(style="max-height: 20rem; overflow-y: scroll; overflow-x: hidden; width: 100%;")
+                if games
+                  each game in games.joinable
+                    li(style="width: 100%;")
+                      form(action=`/api/games/${game.id}/join` method="post" target="_blank")
+                        button#end-turn.grad-2.btn(style="padding: 10px 20px; border: none;") Join Game
+                        span(style="font-weight: bold; font-size: 1.3em; padding-top: 5px; padding-left: 10px")=game.title
+              form(action="/api/games/create" method="post" style="flex-direction: row")
+                input#title.input-field(type="text" placeholder="Title (optional)" name="title")
+                button#create-game.btn.grad-1(style="padding: 10px 20px; border: none;") Create Game
+        div(style="display: flex")
+            .wrapper(style="margin-top: 10px; margin-left: 20px; margin-right: 0px; height: 30em;")
+                +chat()
+    script(src="/javascripts/chat.js")
 
-  #games-list
-    h3 Joinable Games
-    ul
-      if games
-        each game in games.joinable
-          li
-          span= game.title
-            form(action=`/api/games/${game.id}/join` method="post" target="_blank")
-              button Join game
+//-block content
+  link(rel='stylesheet', href='/stylesheets/style.css')
+  .container
+    h1= Lobby
+    if username 
+      h2 Welcome #{username} (#{userID})!
+    li 
+        a(href="/") Homepage
 
-    //- h3 Active Games
-    //- ul
-    //-   if games
-    //-     each game in games.active
-    //-       li
-    //-         a(href=`/games/${game.id}` target="_blank")= games.title
+    //-#games-list
+      h3 Joinable Games
+      ul
+        if games
+          each game in games.joinable
+            li
+            span= game.title
+              form(action=`/api/games/${game.id}/join` method="post" target="_blank")
+                button Join game
 
-    form(action="/api/games/create" method="post")
-      label(for="title") Title (optional):
-      input#title(type="text" name="title")
-      button#create-game.btn.grad-2 Create a new game
+      //- h3 Active Games
+      //- ul
+      //-   if games
+      //-     each game in games.active
+      //-       li
+      //-         a(href=`/games/${game.id}` target="_blank")= games.title
 
-  template#message
-    span.sender
-    span.content
-    span.timestamp
+      form(action="/api/games/create" method="post")
+        label(for="title") Title (optional):
+        input#title(type="text" name="title")
+        button#create-game.btn.grad-2 Create a new game
 
-  #chat
-    #messages
-    #send
-      input(type="text" id="message-field")
+    .wrapper
+      +chat()
 
-block footer
-  script(src="/socket.io/socket.io.js")
-  //- script(src="/javascripts/setup.js")
-  script(src="/javascripts/chat.js")
-  script(src="/javascripts/gameLogic.js")
-  script(src="/javascripts/game-management.js")
+  block footer
+    script(src="/socket.io/socket.io.js")
+    //- script(src="/javascripts/setup.js")
+    script(src="/javascripts/chat.js")
+    script(src="/javascripts/gameLogic.js")
+    script(src="/javascripts/game-management.js")
 
-  

@@ -13,9 +13,9 @@ block content
             +board(this)
             //- +board(gameBoardTiles, handTiles)
         .game-lobby-right
-            .wrapper
+            .wrapper(style="margin-top: 0px; margin-bottom: 10px; margin-left: 10px")
                 +leaderboard(players)
-            .wrapper
+            .wrapper(style="margin-top: 10px; margin-left: 10px")
                 +chat()
     script(src="/javascripts/gameLogic.js")
     script(src="/javascripts/dragDropHandler.js")
