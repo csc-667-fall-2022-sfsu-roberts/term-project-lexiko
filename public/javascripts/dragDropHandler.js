@@ -32,7 +32,7 @@ for(const handSpace of handSpaces) {
 }
 
 function dragStart() {
-    this.className += " hold";
+    this.classList.add("hold");
     currentTile = this;
     console.log("Picked up tile " + currentTile.firstElementChild.innerText);
 
@@ -43,6 +43,7 @@ function dragStart() {
 }
 
 function dragEnd() {
+    this.classList.remove("hold");
     this.className = "tile";
     //check if hand tile or board tile
     this.className += " hand-tile";
@@ -56,33 +57,22 @@ function dragOver(e) {
 
 function dragEnter(e) {
     e.preventDefault();
-    this.className += " hovered";
+    this.classList.add("hovered");
     //console.log("enter");
 }
 
 function dragLeave(e) {
-    if(this.className.startsWith("hand-space")) {
-        this.className = "hand-space";
-    } else if(this.className.startsWith("board-space")) {
-        this.className = "board-space";
-    }
+    this.classList.remove("hovered");
     //console.log("leave");
 }
 
 function dragDrop() {
+    this.classList.remove("hovered");
     if(this.firstChild) {
         console.log("This space is occupied");
-        if(this.className.startsWith("hand-space")) {
-            this.className = "hand-space";
-        } else if(this.className.startsWith("board-space")) {
-            this.className = "board-space";
-        }
         return;
     }
-    if(this.className.startsWith("hand-space")) {
-        this.className = "hand-space";
-    } else if(this.className.startsWith("board-space")) {
-        this.className = "board-space";
+    if(this.className.startsWith("board-space")) {
         placeTile(currentTile.firstElementChild.innerText, (this.id % 15), Math.round(Math.floor(this.id / 15)));
     }
     this.append(currentTile);

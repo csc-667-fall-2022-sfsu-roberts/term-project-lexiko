@@ -241,6 +241,7 @@ ul {
 .board-wrapper {
   max-width: 40rem;
   padding: 30px;
+  scale: 0.9;
 }
 
 .board {
