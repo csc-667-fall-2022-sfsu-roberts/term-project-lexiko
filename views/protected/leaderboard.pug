@@ -1,4 +1,6 @@
 mixin leaderboard(playerScores)
     ul(id="leaderboard")
-    each player in playerScores ? playerScores : []
-        li= player
+        each player in playerScores ? playerScores : []
+            li
+                span.leadername=player.name
+                span.points=player.score

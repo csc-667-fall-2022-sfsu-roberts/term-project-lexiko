@@ -26,7 +26,7 @@ class Player {
 
     constructor(id) {
         this.id = id;
-        this.name = "";
+        this.name = "bob";
         this.score = 0;
         this.hand = [];
         for(let i = 0;i < 7;i++) {

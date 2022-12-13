@@ -32,6 +32,7 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background: #c2e9fb;
+  overflow: hidden;
 }
 
 img[src = "../images/lexikologo.png"] {
@@ -41,6 +42,7 @@ img[src = "../images/lexikologo.png"] {
 
 .container {
   width: 100%;
+  height: 100%;
   display: flex;
 	align-items: center;
 	justify-content: center;
@@ -80,14 +82,18 @@ img[src = "../images/lexikologo.png"] {
   line-height: inherit;
   width: 100%;
   height: auto;
-  padding: 0.75rem 1.25rem;
+  padding: 0.5rem 1.25rem;
   border: none;
   outline: none;
   border-radius: 2rem;
   color: var(--color-black);
-  background: var(--color-light);
+  background: white;
   text-transform: unset;
   text-rendering: optimizeLegibility;
+
+  box-shadow: 26px 37px 68px -33px rgba(0,0,0,0.4);
+  -webkit-box-shadow: 26px 37px 68px -33px rgba(0,0,0,0.4);
+  -moz-box-shadow: 26px 37px 68px -33px rgba(0,0,0,0.4);
 }
 
 .input-control {
@@ -181,7 +187,8 @@ a {
 
 
 
-body { margin: 0; padding-bottom: 3rem; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+#body { margin: 0; padding-bottom: 3rem; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
 
 #form { background: rgba(0, 0, 0, 0.15); padding: 0.25rem; position: fixed; bottom: 0; left: 0; right: 0; display: flex; height: 3rem; box-sizing: border-box; backdrop-filter: blur(10px); }
 #message-field { border: none; padding: 0 1rem; flex-grow: 1; border-radius: 2rem; margin: 0.25rem; }
@@ -190,10 +197,32 @@ body { margin: 0; padding-bottom: 3rem; font-family: -apple-system, BlinkMacSyst
 
 #messages { list-style-type: none; margin: 0; padding: 0; }
 #messages > li { padding: 0.5rem 1rem; }
-#messages > li:nth-child(odd) { background: #efefef; }
+#messages > li:nth-child(odd) { background: #ffe9ca; }
+
+
 #messages {
+  width: 100%;
   justify-content: center;
   grid-template-columns: (1,1);
+}
+
+#leaderboard > li:nth-child(odd) { background: #ffe9ca; }
+#leaderboard {
+
+  padding-inline-start: 0%;
+  width: 100%;
+  
+}
+
+#leaderboard .leadername {
+  font-size: 2em;
+  padding: 10px;
+}
+
+#leaderboard .points {
+  float: right;
+  font-size: 1.5em;
+  padding-top: 5px;
 }
 
 ul {
@@ -244,9 +273,9 @@ ul {
 }
 
 .hand-space {
-  background-color: #000;
-  color: #000;
-  border-color: #000;
+  background-color: rgb(158, 133, 104);
+  color: rgb(158, 133, 104);
+  border-color: rgb(158, 133, 104);
   border-style: solid;
   border-width: .5px;
   margin: 0 8px;
