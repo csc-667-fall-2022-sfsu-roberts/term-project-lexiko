@@ -26,9 +26,9 @@ class Tile {
 
 class Player {
 
-    constructor(id) {
+    constructor(id, name) {
         this.id = id;
-        this.name = "bob";
+        this.name = name;
         this.score = 0;
         this.hand = [];
         for(let i = 0;i < 7;i++) {
@@ -136,7 +136,7 @@ class Game {
     setupPlayers() {
         this.players = [];
         for(let i = 0;i < 4;i++) {
-            this.players[i] = new Player(i);
+            this.players[i] = new Player(i, "bob"+i);
             this.replaceHand(i);
         }
         this.sessionPlayer = 0;

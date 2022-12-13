@@ -460,6 +460,14 @@ async function validateMove() {
     console.log("SCORE: "+score);
 
     console.log("PASSED");
+
+    let player = [...document.querySelectorAll(".leadername")];
+    player = player.filter(p => {
+        return p.innerHTML == "bob1";
+    });
+    console.log("player length: "+player.length);
+    let playerScore = player[0].parentElement.querySelector(".points");
+    playerScore.innerHTML = parseInt(playerScore.innerHTML)+score;
     return true;
 }
 
