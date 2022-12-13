@@ -22,8 +22,8 @@ block content
                         button#end-turn.grad-2.btn(style="padding: 10px 20px; border: none;") Join Game
                         span(style="font-weight: bold; font-size: 1.3em; padding-top: 5px; padding-left: 10px")=game.title
               form(action="/api/games/create" method="post" style="flex-direction: row")
-                input#title.input-field(type="text" placeholder="Title (optional)" name="title")
-                button#create-game.btn.grad-1(style="padding: 10px 20px; border: none;") Create Game
+                input#title.input-field(style="width: 29em" type="text" placeholder="Title (optional)" name="title")
+                button#create-game.btn.grad-1(style="padding: 10px 7px; border: none;") Create Game
         div(style="display: flex")
             .wrapper(style="margin-top: 10px; margin-left: 20px; margin-right: 0px; height: 30em;")
                 +chat()

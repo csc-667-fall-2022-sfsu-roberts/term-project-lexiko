@@ -3,7 +3,7 @@ const socket = io();
 document
   .querySelector("#message-field")
   .addEventListener("keydown", (event) => {
-    if (event.keyCode === 13) {
+    if (event.keyCode === 13 && document.querySelector("#message-field").value != "") {
       console.log(document.querySelector("#message-field").value)
       fetch("/chat/0", {
         method: "post",
@@ -19,7 +19,12 @@ document
 
 const messages = document.querySelector("#messages");
 
+function updateScroll() {
+  messages.scrollTop = messages.scrollHeight;
+}
+
 socket.on("chat:0", ({ sender, message, timestamp }) => {
+
   const template = document.querySelector("#message");
 
   const content = template.content.cloneNode(true);
@@ -28,4 +33,6 @@ socket.on("chat:0", ({ sender, message, timestamp }) => {
   content.querySelector(".timestamp").innerText = timestamp;
 
   messages.appendChild(content);
+
+  messages.scrollTop = messages.scrollHeight;
 });
