@@ -7,11 +7,11 @@ mixin board(game)
         .wrapper.board-wrapper
             .board
                 each space in board
-                    .board-space(id=space.id)
+                    .board-space(id=space.id, class=`m`+space.multiplier+` t`+space.type)
                         if space.tile
                             +tile(space.tile.id, space.tile.letter, tiles.get(space.tile.letter).points, "false")
-            button#end-turn(onclick=`validateMove()`) End Turn
-        .wrapper.hand-wrapper
+            button#end-turn.grad-2.btn(style="padding: 10px 20px; border: none" onclick=`validateMove()`) End Turn
+        .wrapper.hand-wrapper(style="max-width: 30rem; margin-bottom=0 px;")
             .hand
                 while h < 7
                     .hand-space(id=h++)

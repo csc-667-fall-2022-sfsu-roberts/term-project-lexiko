@@ -92,6 +92,14 @@ async function isValidWord(word) {
     });
 }
 
+function calculateX(id) {
+    return Math.floor(parseInt(id) / 15);
+}
+
+function calculateY(id) {
+    return parseInt(id) % 15;
+}
+
 /*
 Get all .tiles under .board-space
 Return false if not in a row
@@ -349,9 +357,23 @@ async function validateMove() {
     }
 
     for(const word of allWords) {
-        console.log("valid word: "+word.word);
+        console.log("detected word: "+word.word);
         const validWord = isValidWord(word.word);
-        if(await validWord) return false;
+        if(await validWord) {
+            console.log(word.word+" is not in the dictionary");
+            return false;
+        }
+    }
+    //for each word
+    //see if its horizontally or vertically aligned
+    //iterate through each letter
+    //if the letter is on a letter multiplier, multiply
+    //if the letter is on a word multiplier, add it to the word multiplier
+    for(const word of allWords) {
+        console.log("Valid words: "+JSON.stringify(word));
+        if(word.end - word.start >= 15) { //vertically aligned
+            
+        }
     }
 
     console.log("PASSED");

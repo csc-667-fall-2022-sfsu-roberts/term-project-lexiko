@@ -19,17 +19,18 @@
 
 
 var express = require('express');
-const Games = require("../db/game");
+const Games = require("../db/games");
 var router = express.Router()
 
 
 router.get('/', (req, res) => {
-    const {sessionID} = req;
+    // const {sessionID} = req;
     const {username, userID} = req.session;
-
-    Games.all()
+    console.log("userID = " , userID)
+    // res.render('protected/lobby', {username, userID});
+    Games.all(userID)
     .then((games) => {
-        console.log({games});
+        console.log(games);
         res.render('protected/lobby', {username, userID, games});
     }).catch((error) => {
         console.log(error);

@@ -1,16 +1,23 @@
 extends layout
 
 block content
-  h1= title
-  if username 
-    h2 Welcome #{username}
-  p Welcome to #{title} (#{sessionID})
-  ul
-    li
-      a(href="/auth/register") Register
-    li 
-      a(href="/auth/login") Login
-    li 
-      a(href="/lobby") Lobby
-    li 
-      a(href="/game") Game  
+  .container
+    .wrapper
+      h1= title
+      img(src="../images/lexikologo.png", alt="", style="width: 400px; height: auto;")
+      if username 
+        h2 Welcome #{username}!
+      -//p Welcome to #{title} (#{sessionID})
+      ul(style="padding-inline-start: 0")
+        li
+          a(href="/auth/register") 📝 Register
+        br
+        li 
+          a(href="/auth/login") 📲 Login
+        br
+        li 
+          a(href="/lobby") 🔰 Lobbies
+        br
+        li 
+          a(href="/game") 🏃‍♂️ Quick Join
+
