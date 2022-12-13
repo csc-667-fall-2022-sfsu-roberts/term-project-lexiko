@@ -230,6 +230,10 @@ ul {
   float: left;
 }
 
+.sender {
+  font-weight: bold;
+}
+
 .timestamp {
   display: block;
   float: right;
