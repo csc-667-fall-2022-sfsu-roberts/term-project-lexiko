@@ -92,14 +92,6 @@ async function isValidWord(word) {
     });
 }
 
-function calculateX(id) {
-    return Math.floor(parseInt(id) / 15);
-}
-
-function calculateY(id) {
-    return parseInt(id) % 15;
-}
-
 /*
 Get all .tiles under .board-space
 Return false if not in a row
@@ -112,7 +104,7 @@ async function validateMove() {
     //get all placed tiles
     var tiles = [...document.querySelectorAll(".tile")];
     tiles = tiles.filter(tile => {
-        return tile.parentElement.className == "board-space";
+        return tile.parentElement.classList.contains("board-space");
     });
     var placedTiles = tiles.filter(tile => {
         return tile.getAttribute('draggable') == "true";
@@ -192,7 +184,12 @@ async function validateMove() {
                 console.log("RESET WORD; newWordEnd: "+newWordEnd);
                 wordStart = -1;
                 if (newWordStart >= 0) {
-                    newWordEnd = space.id - 1;
+                    if(xvalid) {
+                        newWordEnd = space.id - 1;
+                    } else {
+                        console.log("SPACE ID:"+space.id);
+                        newWordEnd = space.id - 15;
+                    }
                 } else if(newWordEnd < 0) {
                     word = "";
                 }
@@ -266,7 +263,7 @@ async function validateMove() {
                     if (!space.firstChild) {                                            //no tile
                         wordStart = -1;
                         if (newWordStart >= 0) {        //is new word
-                            newWordEnd = space.id - 1;
+                            newWordEnd = space.id - 15;
                             //TODO validate word
                             //if word, break loop2
                             //else return false;
@@ -363,18 +360,104 @@ async function validateMove() {
             console.log(word.word+" is not in the dictionary");
             return false;
         }
+        if(word.end == -1) {
+            word.end = 210+(word.start%15);
+        }
     }
     //for each word
     //see if its horizontally or vertically aligned
     //iterate through each letter
     //if the letter is on a letter multiplier, multiply
     //if the letter is on a word multiplier, add it to the word multiplier
+    let score = 0;
     for(const word of allWords) {
+        let wordScore = 0;
+        let wordMultiplier = 1;
         console.log("Valid words: "+JSON.stringify(word));
         if(word.end - word.start >= 15) { //vertically aligned
-            
+            console.log("vertically aligned");
+            //get column
+            let row = word.start % 15;
+            console.log("row: "+row);
+
+            activeRow = [...document.querySelectorAll(".board-space")];
+            activeRow = activeRow.filter(space => {
+                return parseInt(space.id) % 15 == row
+                    && parseInt(space.id) >= word.start && parseInt(space.id) <= word.end;
+            }).sort((a, b) => {
+                return parseInt(a.id) - parseInt(b.id);
+            });
+            console.log("num spaces = "+activeRow.length);
+
+            for(const space of activeRow) {
+                const points = space.firstChild.querySelector(".tile-points");
+                console.log("id: "+space.id+", points: "+parseInt(points.innerHTML));
+                if(space.firstChild.getAttribute("draggable") != "true") {
+                    wordScore += parseInt(points.innerHTML);
+                } else if(space.classList.contains("tL")) {
+                    console.log("LETTER MULT");
+                    if(space.classList.contains("m2")) {
+                        wordScore += parseInt(points.innerHTML)*2;
+                    } else if(space.classList.contains("m3")) {
+                        wordScore += parseInt(points.innerHTML)*3;
+                    }
+                } else if(space.classList.contains("tW")) {
+                    console.log("WORD MULT");
+                    wordScore += parseInt(points.innerHTML);
+                    if(space.classList.contains("m2")) {
+                        wordMultiplier *= 2;
+                    } else if(space.classList.contains("m3")) {
+                        wordMultiplier *= 3;
+                    }
+                } else {
+                    wordScore += parseInt(points.innerHTML);
+                }
+                console.log("score = "+wordScore);
+            }
+        } else {
+            console.log("horizontally aligned");
+            //get row
+            let row = Math.floor(word.start/15);
+
+            activeRow = [...document.querySelectorAll(".board-space")];
+            activeRow = activeRow.filter(space => {
+                return parseInt(space.id) >= word.start && parseInt(space.id) <= word.end;
+            }).sort((a, b) => {
+                return parseInt(a.id) - parseInt(b.id);
+            });
+            console.log("num spaces = "+activeRow.length);
+
+            for(const space of activeRow) {
+                const points = space.firstChild.querySelector(".tile-points");
+                console.log("id: "+space.id+", points: "+parseInt(points.innerHTML));
+                if(space.firstChild.getAttribute("draggable") != "true") {
+                    wordScore += parseInt(points.innerHTML);
+                } else if(space.classList.contains("tL")) {
+                    console.log("LETTER MULT");
+                    if(space.classList.contains("m2")) {
+                        wordScore += parseInt(points.innerHTML)*2;
+                    } else if(space.classList.contains("m3")) {
+                        wordScore += parseInt(points.innerHTML)*3;
+                    }
+                } else if(space.classList.contains("tW")) {
+                    console.log("WORD MULT");
+                    wordScore += parseInt(points.innerHTML);
+                    if(space.classList.contains("m2")) {
+                        wordMultiplier *= 2;
+                    } else if(space.classList.contains("m3")) {
+                        wordMultiplier *= 3;
+                    }
+                } else {
+                    wordScore += parseInt(points.innerHTML);
+                }
+                console.log("score = "+wordScore);
+            }
         }
+        wordScore *= wordMultiplier;
+        score += wordScore;
     }
+
+    console.log("SCORE: "+score);
 
     console.log("PASSED");
     return true;
