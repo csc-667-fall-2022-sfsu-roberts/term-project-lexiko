@@ -32,7 +32,7 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background: #c2e9fb;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 img[src = "../images/lexikologo.png"] {
@@ -260,6 +260,22 @@ ul {
   border-width: 2px;
   height: 40px;
   width: 40px;
+}
+
+.m2.tW {
+  background-color: #ffa8a8
+}
+
+.m3.tW {
+  background-color: #c65555
+}
+
+.m2.tL {
+  background-color: #a8a8ff
+}
+
+.m3.tL {
+  background-color: #5555c6
 }
 
 .board-space:hover {
